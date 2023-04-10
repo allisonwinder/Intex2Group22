@@ -14,9 +14,17 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\_CookieStyles.css" />
+    <None Include="wwwroot\lib\davidshimjs-qrcodejs-04f46c6\.gitignore" />
+    <None Include="wwwroot\lib\davidshimjs-qrcodejs-04f46c6\index.svg" />
+    <None Include="wwwroot\lib\davidshimjs-qrcodejs-04f46c6\jquery.min.js" />
+    <None Include="wwwroot\lib\davidshimjs-qrcodejs-04f46c6\LICENSE" />
+    <None Include="wwwroot\lib\davidshimjs-qrcodejs-04f46c6\qrcode.js" />
+    <None Include="wwwroot\lib\davidshimjs-qrcodejs-04f46c6\qrcode.min.js" />
+    <None Include="wwwroot\lib\davidshimjs-qrcodejs-04f46c6\README.md" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
