@@ -8,12 +8,12 @@ namespace Intex2Group22.Controllers
 {
     public class HomeController : Controller
     {
-        //private IMummiesRepository repo;
+        private IMummiesRepository repo;
 
-        //public HomeController(IMummiesRepository temp)
-        //{
-        //    repo = temp;
-        //}
+        public HomeController(IMummiesRepository temp)
+        {
+            repo = temp;
+        }
 
         public IActionResult Index()
         {
@@ -26,8 +26,10 @@ namespace Intex2Group22.Controllers
         }
 
         public IActionResult allMummies()
-        { 
-            return View();
+        {
+            var blah = repo.Burialmains
+                .Skip(10).Take(10);
+            return View(blah);
         }
            
 
