@@ -3,17 +3,19 @@ using System;
 using Intex2Group22.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Intex2Group22.Migrations
+namespace Intex2Group22.Migrations.intexmummies
 {
     [DbContext(typeof(intexmummiesContext))]
-    partial class intexmummiesContextModelSnapshot : ModelSnapshot
+    [Migration("20230411162919_dangit")]
+    partial class dangit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

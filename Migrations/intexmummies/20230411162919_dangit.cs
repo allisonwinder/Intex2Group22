@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Intex2Group22.Migrations
+namespace Intex2Group22.Migrations.intexmummies
 {
-    public partial class Initial : Migration
+    public partial class dangit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
