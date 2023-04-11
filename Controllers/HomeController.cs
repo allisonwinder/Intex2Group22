@@ -25,11 +25,25 @@ namespace Intex2Group22.Controllers
             return View();
         }
 
-        public IActionResult allMummies()
+        public IActionResult allMummies(int pageNum = 1)
         {
-            var blah = repo.Burialmains
-                .Skip(10).Take(10);
-            return View(blah);
+            int pageSize = 10;
+            var x = new MummiesViewModel
+            {
+                Burialmains = repo.Burialmains
+                .OrderBy(b => b.Id)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumMummies = repo.Burialmains.Count(),
+                    MummiesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+       
+            return View(x);
         }
            
 

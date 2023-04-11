@@ -1,6 +1,7 @@
 using Intex2Group22.Data;
 using Intex2Group22.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IMummiesRepository, EFMummiesRepository>();
+
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
@@ -69,6 +71,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapDefaultControllerRoute();
 
 app.MapControllerRoute(
     name: "default",

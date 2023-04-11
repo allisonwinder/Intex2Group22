@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Intex2Group22.Migrations.intexmummies
 {
     [DbContext(typeof(intexmummiesContext))]
-    [Migration("20230411162919_dangit")]
-    partial class dangit
+    [Migration("20230411200552_thisisit")]
+    partial class thisisit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

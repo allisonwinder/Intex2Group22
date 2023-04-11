@@ -7,7 +7,7 @@
         public int CurrentPage { get; set; }
 
         //figure out how many mummies there are
-        public int TotalPages => (int) Math.Ceiling((double) TotalNumMummies / MummiesPerPage); 
+        public int TotalPages => (int)Math.Ceiling((double)TotalNumMummies / MummiesPerPage);
 
     }
 }
