@@ -1,10 +1,10 @@
 ﻿@{
 }
 
-@*@model ProjectsViewModel
+@model IQueryable<Burialmain>
 
 <h1>Mummies</h1>
-@foreach (Burialmain b in Model.Burialmains)
+@foreach (Burialmain b in Model)
 {
   <ul>
     <li>Hair: @b.Hair</li>
@@ -13,8 +13,7 @@
     <li>Date of Excavation: @b.Dateofexcavation</li>
 </ul>  
 }
-<br />*@
-<h1>Mummies</h1>
+<br />
 
 @*<a asp-action="allMummies" asp-route-pageNum="1">1</a>
 <a asp-action="allMummies" asp-route-pageNum="2">2</a>
