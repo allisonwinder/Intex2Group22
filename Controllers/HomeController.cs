@@ -1,4 +1,5 @@
 ﻿using Intex2Group22.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -22,6 +23,13 @@ namespace Intex2Group22.Controllers
         {
             return View();
         }
+
+        //// Role based Delete function
+        //[Authorize(Roles = "Administrator")]
+        //public IActionResult Users()
+        //{
+
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
