@@ -8,15 +8,17 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<intexmummiesContext>(options =>
+{
+    options.UseNpgsql(connectionString);
+});
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IMummiesRepository, EFMummiesRepository>();
+//builder.Services.AddScoped<IMummiesRepository, EFMummiesRepository>();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {

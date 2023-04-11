@@ -144,7 +144,7 @@ namespace Intex2Group22.Migrations
                 name: "bodyanalysischart",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false),
+                    burialid = table.Column<string>(type: "character varying", nullable: false),
                     femur = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     humerusheaddiameter = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     squamossuture = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
@@ -152,30 +152,44 @@ namespace Intex2Group22.Migrations
                     medical_ip_ramus = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     perservationindex = table.Column<int>(type: "integer", nullable: true),
                     gonion = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    humeruslength = table.Column<int>(type: "integer", nullable: true),
-                    femurlength = table.Column<int>(type: "integer", nullable: true),
+                    humeruslength = table.Column<double>(type: "double precision", nullable: true),
+                    femurlength = table.Column<double>(type: "double precision", nullable: true),
                     lambdoidsuture = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    ventralarc = table.Column<bool>(type: "boolean", nullable: true),
-                    tootheruptionageestimation = table.Column<int>(type: "integer", nullable: true),
+                    ventralarc = table.Column<string>(type: "character varying", nullable: true),
+                    tootheruptionageestimation = table.Column<string>(type: "character varying", nullable: true),
                     nuchalcrest = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    estimatestature = table.Column<int>(type: "integer", nullable: true),
-                    notes = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: true),
+                    estimatestature = table.Column<string>(type: "character varying", nullable: true),
+                    notes = table.Column<string>(type: "text", nullable: true),
                     osteophytosis = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     subpubicangle = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    robust = table.Column<bool>(type: "boolean", nullable: true),
+                    robust = table.Column<string>(type: "character varying", nullable: true),
                     femurheaddiameter = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     sciaticnotch = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     supraorbitalridges = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     orbitedge = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    toothattrition = table.Column<int>(type: "integer", nullable: true),
+                    toothattrition = table.Column<string>(type: "character varying", nullable: true),
                     sphenooccipitalsynchondrosis = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    parietalblossing = table.Column<bool>(type: "boolean", nullable: true),
+                    parietalblossing = table.Column<string>(type: "character varying", nullable: true),
                     observations = table.Column<string>(type: "character varying", nullable: true),
-                    humerus = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true)
+                    humerus = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    squarenorthsouth = table.Column<int>(type: "integer", nullable: true),
+                    northsouth = table.Column<string>(type: "character varying", nullable: true),
+                    squareeastwest = table.Column<int>(type: "integer", nullable: true),
+                    eastwest = table.Column<string>(type: "character varying", nullable: true),
+                    burialnumber = table.Column<string>(type: "character varying", nullable: true),
+                    dateofexamination = table.Column<string>(type: "character varying", nullable: true),
+                    haircolor = table.Column<string>(type: "character varying", nullable: true),
+                    zygomaticcrest = table.Column<string>(type: "character varying", nullable: true),
+                    tootheruption = table.Column<string>(type: "character varying", nullable: true),
+                    pubicbone = table.Column<string>(type: "character varying", nullable: true),
+                    preauricularsulcus = table.Column<string>(type: "character varying", nullable: true),
+                    dorsalpitting = table.Column<string>(type: "character varying", nullable: true),
+                    tibia = table.Column<string>(type: "character varying", nullable: true),
+                    area = table.Column<string>(type: "character varying", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_bodyanalysischart", x => x.id);
+                    table.PrimaryKey("bodyanalysischart_pkey", x => x.burialid);
                 });
 
             migrationBuilder.CreateTable(
@@ -217,7 +231,7 @@ namespace Intex2Group22.Migrations
                     westtohead = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     samplescollected = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     area = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    burialid = table.Column<long>(type: "bigint", nullable: true),
+                    burialid = table.Column<string>(type: "character varying", nullable: true),
                     length = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     burialnumber = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     dataexpertinitials = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
@@ -290,26 +304,23 @@ namespace Intex2Group22.Migrations
                 name: "c14",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false),
-                    description = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: true),
-                    category = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    size = table.Column<int>(type: "integer", nullable: true),
+                    burialid = table.Column<string>(type: "character varying", nullable: false),
+                    description = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
                     agebp = table.Column<int>(type: "integer", nullable: true),
-                    calibratedspan = table.Column<int>(type: "integer", nullable: true),
-                    tubenumber = table.Column<int>(type: "integer", nullable: true),
-                    calibrateddatemin = table.Column<int>(type: "integer", nullable: true),
-                    calibrateddateavg = table.Column<int>(type: "integer", nullable: true),
-                    foci = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    rack = table.Column<int>(type: "integer", nullable: true),
-                    calendardate = table.Column<int>(type: "integer", nullable: true),
-                    calibrateddatemax = table.Column<int>(type: "integer", nullable: true),
-                    c14lab = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    questions = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: true),
-                    location = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: true)
+                    squarenorthsouth = table.Column<string>(type: "character varying", nullable: true),
+                    northsouth = table.Column<string>(type: "character varying", nullable: true),
+                    squareeastwest = table.Column<string>(type: "character varying", nullable: true),
+                    eastwest = table.Column<string>(type: "character varying", nullable: true),
+                    area = table.Column<string>(type: "character varying", nullable: true),
+                    burialnumber = table.Column<string>(type: "character varying", nullable: true),
+                    calendarmin = table.Column<int>(type: "integer", nullable: true),
+                    mintimeperiod = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: true),
+                    calendarmax = table.Column<int>(type: "integer", nullable: true),
+                    maxtimeperiod = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_c14", x => x.id);
+                    table.PrimaryKey("c14_pkey", x => x.burialid);
                 });
 
             migrationBuilder.CreateTable(

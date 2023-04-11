@@ -25,7 +25,7 @@ namespace Intex2Group22.Models
         public string? Westtohead { get; set; }
         public string? Samplescollected { get; set; }
         public string? Area { get; set; }
-        public long? Burialid { get; set; }
+        public string? Burialid { get; set; }
         public string? Length { get; set; }
         public string? Burialnumber { get; set; }
         public string? Dataexpertinitials { get; set; }

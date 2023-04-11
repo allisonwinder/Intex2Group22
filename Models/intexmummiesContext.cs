@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Intex2Group22.Models
 {
-    public partial class mummiesContext : DbContext
+    public partial class intexmummiesContext : DbContext
     {
-        public mummiesContext()
+        public intexmummiesContext()
         {
         }
 
-        public mummiesContext(DbContextOptions<mummiesContext> options)
+        public intexmummiesContext(DbContextOptions<intexmummiesContext> options)
             : base(options)
         {
         }
@@ -56,7 +56,8 @@ namespace Intex2Group22.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("User ID=postgres;Password=password;Host=localhost;Port=5432;Database=mummies;Pooling=true;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseNpgsql("User ID=postgres;Password=password;Database=intexmummies;Server=intexmummies.czciqxxxykge.us-east-1.rds.amazonaws.com;Port=5432;");
             }
         }
 
@@ -264,17 +265,42 @@ namespace Intex2Group22.Models
 
             modelBuilder.Entity<Bodyanalysischart>(entity =>
             {
+                entity.HasKey(e => e.Burialid)
+                    .HasName("bodyanalysischart_pkey");
+
                 entity.ToTable("bodyanalysischart");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Burialid)
+                    .HasColumnType("character varying")
+                    .HasColumnName("burialid");
+
+                entity.Property(e => e.Area)
+                    .HasColumnType("character varying")
+                    .HasColumnName("area");
+
+                entity.Property(e => e.Burialnumber)
+                    .HasColumnType("character varying")
+                    .HasColumnName("burialnumber");
 
                 entity.Property(e => e.CariesPeriodontalDisease)
                     .HasMaxLength(200)
                     .HasColumnName("caries_periodontal_disease");
 
-                entity.Property(e => e.Estimatestature).HasColumnName("estimatestature");
+                entity.Property(e => e.Dateofexamination)
+                    .HasColumnType("character varying")
+                    .HasColumnName("dateofexamination");
+
+                entity.Property(e => e.Dorsalpitting)
+                    .HasColumnType("character varying")
+                    .HasColumnName("dorsalpitting");
+
+                entity.Property(e => e.Eastwest)
+                    .HasColumnType("character varying")
+                    .HasColumnName("eastwest");
+
+                entity.Property(e => e.Estimatestature)
+                    .HasColumnType("character varying")
+                    .HasColumnName("estimatestature");
 
                 entity.Property(e => e.Femur)
                     .HasMaxLength(200)
@@ -289,6 +315,10 @@ namespace Intex2Group22.Models
                 entity.Property(e => e.Gonion)
                     .HasMaxLength(200)
                     .HasColumnName("gonion");
+
+                entity.Property(e => e.Haircolor)
+                    .HasColumnType("character varying")
+                    .HasColumnName("haircolor");
 
                 entity.Property(e => e.Humerus)
                     .HasMaxLength(200)
@@ -308,9 +338,11 @@ namespace Intex2Group22.Models
                     .HasMaxLength(200)
                     .HasColumnName("medical_ip_ramus");
 
-                entity.Property(e => e.Notes)
-                    .HasMaxLength(2000)
-                    .HasColumnName("notes");
+                entity.Property(e => e.Northsouth)
+                    .HasColumnType("character varying")
+                    .HasColumnName("northsouth");
+
+                entity.Property(e => e.Notes).HasColumnName("notes");
 
                 entity.Property(e => e.Nuchalcrest)
                     .HasMaxLength(200)
@@ -328,11 +360,23 @@ namespace Intex2Group22.Models
                     .HasMaxLength(200)
                     .HasColumnName("osteophytosis");
 
-                entity.Property(e => e.Parietalblossing).HasColumnName("parietalblossing");
+                entity.Property(e => e.Parietalblossing)
+                    .HasColumnType("character varying")
+                    .HasColumnName("parietalblossing");
 
                 entity.Property(e => e.Perservationindex).HasColumnName("perservationindex");
 
-                entity.Property(e => e.Robust).HasColumnName("robust");
+                entity.Property(e => e.Preauricularsulcus)
+                    .HasColumnType("character varying")
+                    .HasColumnName("preauricularsulcus");
+
+                entity.Property(e => e.Pubicbone)
+                    .HasColumnType("character varying")
+                    .HasColumnName("pubicbone");
+
+                entity.Property(e => e.Robust)
+                    .HasColumnType("character varying")
+                    .HasColumnName("robust");
 
                 entity.Property(e => e.Sciaticnotch)
                     .HasMaxLength(200)
@@ -346,6 +390,10 @@ namespace Intex2Group22.Models
                     .HasMaxLength(200)
                     .HasColumnName("squamossuture");
 
+                entity.Property(e => e.Squareeastwest).HasColumnName("squareeastwest");
+
+                entity.Property(e => e.Squarenorthsouth).HasColumnName("squarenorthsouth");
+
                 entity.Property(e => e.Subpubicangle)
                     .HasMaxLength(200)
                     .HasColumnName("subpubicangle");
@@ -354,11 +402,29 @@ namespace Intex2Group22.Models
                     .HasMaxLength(200)
                     .HasColumnName("supraorbitalridges");
 
-                entity.Property(e => e.Toothattrition).HasColumnName("toothattrition");
+                entity.Property(e => e.Tibia)
+                    .HasColumnType("character varying")
+                    .HasColumnName("tibia");
 
-                entity.Property(e => e.Tootheruptionageestimation).HasColumnName("tootheruptionageestimation");
+                entity.Property(e => e.Toothattrition)
+                    .HasColumnType("character varying")
+                    .HasColumnName("toothattrition");
 
-                entity.Property(e => e.Ventralarc).HasColumnName("ventralarc");
+                entity.Property(e => e.Tootheruption)
+                    .HasColumnType("character varying")
+                    .HasColumnName("tootheruption");
+
+                entity.Property(e => e.Tootheruptionageestimation)
+                    .HasColumnType("character varying")
+                    .HasColumnName("tootheruptionageestimation");
+
+                entity.Property(e => e.Ventralarc)
+                    .HasColumnType("character varying")
+                    .HasColumnName("ventralarc");
+
+                entity.Property(e => e.Zygomaticcrest)
+                    .HasColumnType("character varying")
+                    .HasColumnName("zygomaticcrest");
             });
 
             modelBuilder.Entity<Book>(entity =>
@@ -406,7 +472,9 @@ namespace Intex2Group22.Models
                     .HasMaxLength(200)
                     .HasColumnName("area");
 
-                entity.Property(e => e.Burialid).HasColumnName("burialid");
+                entity.Property(e => e.Burialid)
+                    .HasColumnType("character varying")
+                    .HasColumnName("burialid");
 
                 entity.Property(e => e.Burialmaterials)
                     .HasMaxLength(5)
@@ -587,53 +655,56 @@ namespace Intex2Group22.Models
 
             modelBuilder.Entity<C14>(entity =>
             {
+                entity.HasKey(e => e.Burialid)
+                    .HasName("c14_pkey");
+
                 entity.ToTable("c14");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Burialid)
+                    .HasColumnType("character varying")
+                    .HasColumnName("burialid");
 
                 entity.Property(e => e.Agebp).HasColumnName("agebp");
 
-                entity.Property(e => e.C14lab)
-                    .HasMaxLength(200)
-                    .HasColumnName("c14lab");
+                entity.Property(e => e.Area)
+                    .HasColumnType("character varying")
+                    .HasColumnName("area");
 
-                entity.Property(e => e.Calendardate).HasColumnName("calendardate");
+                entity.Property(e => e.Burialnumber)
+                    .HasColumnType("character varying")
+                    .HasColumnName("burialnumber");
 
-                entity.Property(e => e.Calibrateddateavg).HasColumnName("calibrateddateavg");
+                entity.Property(e => e.Calendarmax).HasColumnName("calendarmax");
 
-                entity.Property(e => e.Calibrateddatemax).HasColumnName("calibrateddatemax");
-
-                entity.Property(e => e.Calibrateddatemin).HasColumnName("calibrateddatemin");
-
-                entity.Property(e => e.Calibratedspan).HasColumnName("calibratedspan");
-
-                entity.Property(e => e.Category)
-                    .HasMaxLength(200)
-                    .HasColumnName("category");
+                entity.Property(e => e.Calendarmin).HasColumnName("calendarmin");
 
                 entity.Property(e => e.Description)
-                    .HasMaxLength(2000)
+                    .HasMaxLength(20)
                     .HasColumnName("description");
 
-                entity.Property(e => e.Foci)
-                    .HasMaxLength(200)
-                    .HasColumnName("foci");
+                entity.Property(e => e.Eastwest)
+                    .HasColumnType("character varying")
+                    .HasColumnName("eastwest");
 
-                entity.Property(e => e.Location)
-                    .HasMaxLength(2000)
-                    .HasColumnName("location");
+                entity.Property(e => e.Maxtimeperiod)
+                    .HasMaxLength(2)
+                    .HasColumnName("maxtimeperiod");
 
-                entity.Property(e => e.Questions)
-                    .HasMaxLength(2000)
-                    .HasColumnName("questions");
+                entity.Property(e => e.Mintimeperiod)
+                    .HasMaxLength(2)
+                    .HasColumnName("mintimeperiod");
 
-                entity.Property(e => e.Rack).HasColumnName("rack");
+                entity.Property(e => e.Northsouth)
+                    .HasColumnType("character varying")
+                    .HasColumnName("northsouth");
 
-                entity.Property(e => e.Size).HasColumnName("size");
+                entity.Property(e => e.Squareeastwest)
+                    .HasColumnType("character varying")
+                    .HasColumnName("squareeastwest");
 
-                entity.Property(e => e.Tubenumber).HasColumnName("tubenumber");
+                entity.Property(e => e.Squarenorthsouth)
+                    .HasColumnType("character varying")
+                    .HasColumnName("squarenorthsouth");
             });
 
             modelBuilder.Entity<Color>(entity =>

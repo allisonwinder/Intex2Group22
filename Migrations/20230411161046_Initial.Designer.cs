@@ -3,6 +3,7 @@ using System;
 using Intex2Group22.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,10 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Intex2Group22.Migrations
 {
-    [DbContext(typeof(mummiesContext))]
-    partial class mummiesContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(intexmummiesContext))]
+    [Migration("20230411161046_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,17 +289,37 @@ namespace Intex2Group22.Migrations
 
             modelBuilder.Entity("Intex2Group22.Models.Bodyanalysischart", b =>
                 {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
+                    b.Property<string>("Burialid")
+                        .HasColumnType("character varying")
+                        .HasColumnName("burialid");
+
+                    b.Property<string>("Area")
+                        .HasColumnType("character varying")
+                        .HasColumnName("area");
+
+                    b.Property<string>("Burialnumber")
+                        .HasColumnType("character varying")
+                        .HasColumnName("burialnumber");
 
                     b.Property<string>("CariesPeriodontalDisease")
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("caries_periodontal_disease");
 
-                    b.Property<int?>("Estimatestature")
-                        .HasColumnType("integer")
+                    b.Property<string>("Dateofexamination")
+                        .HasColumnType("character varying")
+                        .HasColumnName("dateofexamination");
+
+                    b.Property<string>("Dorsalpitting")
+                        .HasColumnType("character varying")
+                        .HasColumnName("dorsalpitting");
+
+                    b.Property<string>("Eastwest")
+                        .HasColumnType("character varying")
+                        .HasColumnName("eastwest");
+
+                    b.Property<string>("Estimatestature")
+                        .HasColumnType("character varying")
                         .HasColumnName("estimatestature");
 
                     b.Property<string>("Femur")
@@ -310,14 +332,18 @@ namespace Intex2Group22.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("femurheaddiameter");
 
-                    b.Property<int?>("Femurlength")
-                        .HasColumnType("integer")
+                    b.Property<double?>("Femurlength")
+                        .HasColumnType("double precision")
                         .HasColumnName("femurlength");
 
                     b.Property<string>("Gonion")
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
                         .HasColumnName("gonion");
+
+                    b.Property<string>("Haircolor")
+                        .HasColumnType("character varying")
+                        .HasColumnName("haircolor");
 
                     b.Property<string>("Humerus")
                         .HasMaxLength(200)
@@ -329,8 +355,8 @@ namespace Intex2Group22.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("humerusheaddiameter");
 
-                    b.Property<int?>("Humeruslength")
-                        .HasColumnType("integer")
+                    b.Property<double?>("Humeruslength")
+                        .HasColumnType("double precision")
                         .HasColumnName("humeruslength");
 
                     b.Property<string>("Lambdoidsuture")
@@ -343,9 +369,12 @@ namespace Intex2Group22.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("medical_ip_ramus");
 
+                    b.Property<string>("Northsouth")
+                        .HasColumnType("character varying")
+                        .HasColumnName("northsouth");
+
                     b.Property<string>("Notes")
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)")
+                        .HasColumnType("text")
                         .HasColumnName("notes");
 
                     b.Property<string>("Nuchalcrest")
@@ -367,16 +396,24 @@ namespace Intex2Group22.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("osteophytosis");
 
-                    b.Property<bool?>("Parietalblossing")
-                        .HasColumnType("boolean")
+                    b.Property<string>("Parietalblossing")
+                        .HasColumnType("character varying")
                         .HasColumnName("parietalblossing");
 
                     b.Property<int?>("Perservationindex")
                         .HasColumnType("integer")
                         .HasColumnName("perservationindex");
 
-                    b.Property<bool?>("Robust")
-                        .HasColumnType("boolean")
+                    b.Property<string>("Preauricularsulcus")
+                        .HasColumnType("character varying")
+                        .HasColumnName("preauricularsulcus");
+
+                    b.Property<string>("Pubicbone")
+                        .HasColumnType("character varying")
+                        .HasColumnName("pubicbone");
+
+                    b.Property<string>("Robust")
+                        .HasColumnType("character varying")
                         .HasColumnName("robust");
 
                     b.Property<string>("Sciaticnotch")
@@ -394,6 +431,14 @@ namespace Intex2Group22.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("squamossuture");
 
+                    b.Property<int?>("Squareeastwest")
+                        .HasColumnType("integer")
+                        .HasColumnName("squareeastwest");
+
+                    b.Property<int?>("Squarenorthsouth")
+                        .HasColumnType("integer")
+                        .HasColumnName("squarenorthsouth");
+
                     b.Property<string>("Subpubicangle")
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)")
@@ -404,19 +449,32 @@ namespace Intex2Group22.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("supraorbitalridges");
 
-                    b.Property<int?>("Toothattrition")
-                        .HasColumnType("integer")
+                    b.Property<string>("Tibia")
+                        .HasColumnType("character varying")
+                        .HasColumnName("tibia");
+
+                    b.Property<string>("Toothattrition")
+                        .HasColumnType("character varying")
                         .HasColumnName("toothattrition");
 
-                    b.Property<int?>("Tootheruptionageestimation")
-                        .HasColumnType("integer")
+                    b.Property<string>("Tootheruption")
+                        .HasColumnType("character varying")
+                        .HasColumnName("tootheruption");
+
+                    b.Property<string>("Tootheruptionageestimation")
+                        .HasColumnType("character varying")
                         .HasColumnName("tootheruptionageestimation");
 
-                    b.Property<bool?>("Ventralarc")
-                        .HasColumnType("boolean")
+                    b.Property<string>("Ventralarc")
+                        .HasColumnType("character varying")
                         .HasColumnName("ventralarc");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Zygomaticcrest")
+                        .HasColumnType("character varying")
+                        .HasColumnName("zygomaticcrest");
+
+                    b.HasKey("Burialid")
+                        .HasName("bodyanalysischart_pkey");
 
                     b.ToTable("bodyanalysischart", (string)null);
                 });
@@ -472,8 +530,8 @@ namespace Intex2Group22.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("area");
 
-                    b.Property<long?>("Burialid")
-                        .HasColumnType("bigint")
+                    b.Property<string>("Burialid")
+                        .HasColumnType("character varying")
                         .HasColumnName("burialid");
 
                     b.Property<string>("Burialmaterials")
@@ -704,77 +762,63 @@ namespace Intex2Group22.Migrations
 
             modelBuilder.Entity("Intex2Group22.Models.C14", b =>
                 {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
+                    b.Property<string>("Burialid")
+                        .HasColumnType("character varying")
+                        .HasColumnName("burialid");
 
                     b.Property<int?>("Agebp")
                         .HasColumnType("integer")
                         .HasColumnName("agebp");
 
-                    b.Property<string>("C14lab")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("c14lab");
+                    b.Property<string>("Area")
+                        .HasColumnType("character varying")
+                        .HasColumnName("area");
 
-                    b.Property<int?>("Calendardate")
+                    b.Property<string>("Burialnumber")
+                        .HasColumnType("character varying")
+                        .HasColumnName("burialnumber");
+
+                    b.Property<int?>("Calendarmax")
                         .HasColumnType("integer")
-                        .HasColumnName("calendardate");
+                        .HasColumnName("calendarmax");
 
-                    b.Property<int?>("Calibrateddateavg")
+                    b.Property<int?>("Calendarmin")
                         .HasColumnType("integer")
-                        .HasColumnName("calibrateddateavg");
-
-                    b.Property<int?>("Calibrateddatemax")
-                        .HasColumnType("integer")
-                        .HasColumnName("calibrateddatemax");
-
-                    b.Property<int?>("Calibrateddatemin")
-                        .HasColumnType("integer")
-                        .HasColumnName("calibrateddatemin");
-
-                    b.Property<int?>("Calibratedspan")
-                        .HasColumnType("integer")
-                        .HasColumnName("calibratedspan");
-
-                    b.Property<string>("Category")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("category");
+                        .HasColumnName("calendarmin");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("description");
 
-                    b.Property<string>("Foci")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("foci");
+                    b.Property<string>("Eastwest")
+                        .HasColumnType("character varying")
+                        .HasColumnName("eastwest");
 
-                    b.Property<string>("Location")
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)")
-                        .HasColumnName("location");
+                    b.Property<string>("Maxtimeperiod")
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)")
+                        .HasColumnName("maxtimeperiod");
 
-                    b.Property<string>("Questions")
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)")
-                        .HasColumnName("questions");
+                    b.Property<string>("Mintimeperiod")
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)")
+                        .HasColumnName("mintimeperiod");
 
-                    b.Property<int?>("Rack")
-                        .HasColumnType("integer")
-                        .HasColumnName("rack");
+                    b.Property<string>("Northsouth")
+                        .HasColumnType("character varying")
+                        .HasColumnName("northsouth");
 
-                    b.Property<int?>("Size")
-                        .HasColumnType("integer")
-                        .HasColumnName("size");
+                    b.Property<string>("Squareeastwest")
+                        .HasColumnType("character varying")
+                        .HasColumnName("squareeastwest");
 
-                    b.Property<int?>("Tubenumber")
-                        .HasColumnType("integer")
-                        .HasColumnName("tubenumber");
+                    b.Property<string>("Squarenorthsouth")
+                        .HasColumnType("character varying")
+                        .HasColumnName("squarenorthsouth");
 
-                    b.HasKey("Id");
+                    b.HasKey("Burialid")
+                        .HasName("c14_pkey");
 
                     b.ToTable("c14", (string)null);
                 });
