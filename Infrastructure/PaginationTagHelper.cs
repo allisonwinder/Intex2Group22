@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Intex2Group22.Infrastructure
 {
-    [HtmlTargetElement("div", Attributes = "page-blah")]
+    [HtmlTargetElement("div", Attributes="page-blah")]
     public class PaginationTagHelper : TagHelper
     {
         //Dynamically create page links for us

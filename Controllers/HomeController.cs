@@ -8,9 +8,9 @@ namespace Intex2Group22.Controllers
 {
     public class HomeController : Controller
     {
-        private IMummiesRepository repo;
+        private intexmummiesContext repo { get; set; }
 
-        public HomeController(IMummiesRepository temp)
+        public HomeController(intexmummiesContext temp)
         {
             repo = temp;
         }
@@ -20,6 +20,21 @@ namespace Intex2Group22.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            //ViewBag.Majors but change = repo.ToList();
+            var form = repo.Burialmains.Single(x => x.Id == id);
+            return View("AddForm", form);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Burialmain bm)
+        {
+            repo.Update(bm);
+            repo.SaveChanges();
+            return RedirectToAction("allMummies");
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -33,7 +48,7 @@ namespace Intex2Group22.Controllers
                 Burialmains = repo.Burialmains
                 .OrderBy(b => b.Id)
                 .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
+                .Take(pageSize).ToList(),
 
                 PageInfo = new PageInfo
                 {
@@ -52,5 +67,24 @@ namespace Intex2Group22.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var ids = repo.Burialmains.Single(x => x.Id == id);
+            return View(ids);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Burialmain bm)
+        {
+            
+            repo.Burialmains.Remove(bm);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+        }
+
     }
+
 }

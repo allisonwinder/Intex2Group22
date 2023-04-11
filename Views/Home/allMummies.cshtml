@@ -11,7 +11,9 @@
     <li>Sex: @b.Sex</li>
     <li>Length: @b.Length</li>
     <li>Date of Excavation: @b.Dateofexcavation</li>
-</ul>  
+    </ul>
+    <a asp-controller="Home" asp-action="Edit" asp-route-id="@b.Id">Edit</a>
+    <a asp-controller="Home" asp-action="Delete" asp-route-id="@b.Id">Delete</a>
 <br />
 }
 

@@ -23,8 +23,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IMummiesRepository, EFMummiesRepository>();
-
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
