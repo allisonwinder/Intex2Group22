@@ -1,5 +1,7 @@
 ﻿using Intex2Group22.Models;
 using Intex2Group22.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
@@ -10,6 +12,7 @@ namespace Intex2Group22.Controllers
     {
         private IMummiesRepository repo;
 
+        [Authorize(Roles = "Administrator")]
         public HomeController(IMummiesRepository temp)
         {
             repo = temp;
