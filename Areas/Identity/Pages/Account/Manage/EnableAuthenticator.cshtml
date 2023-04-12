@@ -51,7 +51,7 @@
     <partial name="_ValidationScriptsPartial" />
     <script src="~/lib/qrcode/qrcode.min.js"></script>
     <script type="text/javascript">
-        var qrcode = new QRCode(document.getElementById("qrCode"),
+        new QRCode(document.getElementById("qrCode"),
             {
                 text: "@Html.Raw(Model.AuthenticatorUri)",
                 width: 400,

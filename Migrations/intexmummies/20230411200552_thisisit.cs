@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Intex2Group22.Migrations.intexmummies
 {
-    public partial class dangit : Migration
+    public partial class thisisit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

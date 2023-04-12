@@ -1,6 +1,8 @@
+using Intex2Group22.Controllers;
 using Intex2Group22.Data;
 using Intex2Group22.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<intexmummiesContext>(options =>
 {
     options.UseNpgsql(connectionString);
 });
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -20,7 +23,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IMummiesRepository, EFMummiesRepository>();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
@@ -28,6 +30,8 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
+
+//Password strength requirements
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Default Password settings.
@@ -53,12 +57,12 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseMiddleware<CspMiddleware>(); // add middleware for CSP header
+//app.Use(async (context, next) => {
+//    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
 
-app.Use(async (context, next) => {
-    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
-
-    await next();
-});
+//    await next();
+//});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -73,6 +77,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
+
+
 app.MapRazorPages();
 
 app.Run();
