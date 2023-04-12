@@ -50,7 +50,7 @@ namespace Intex2Group22.Controllers
                 Burialmains = repo.Burialmains
                 .OrderBy(b => b.Id)
                 .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize).ToList(),
+                .Take(pageSize).ToList()
 
                 PageInfo = new PageInfo
                 {
