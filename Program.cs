@@ -1,9 +1,10 @@
+//using Intex2Group22.Areas.Identity.Data;
 using Intex2Group22.Controllers;
-using Intex2Group22.Data;
 using Intex2Group22.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
+using Intex2Group22.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -14,15 +15,25 @@ builder.Services.AddDbContext<intexmummiesContext>(options =>
 {
     options.UseNpgsql(connectionString);
 });
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
+{
+    options.UseNpgsql(connectionString);
+});
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+#region Authorization
+
+AddAuthorizationPolicies(builder.Services);
+
+#endregion
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
@@ -83,3 +94,12 @@ app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 app.Run();
+
+
+void AddAuthorizationPolicies(IServiceCollection services)
+{
+    services.AddAuthorization(options =>
+    {
+        options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+    });
+}
