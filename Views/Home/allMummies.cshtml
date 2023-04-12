@@ -6,12 +6,27 @@
 <h1>Mummies</h1>
 @foreach (Burialmain b in Model)
 {
-  <ul>
-    <li>Hair: @b.Hair</li>
-    <li>Sex: @b.Sex</li>
-    <li>Length: @b.Length</li>
-    <li>Date of Excavation: @b.Dateofexcavation</li>
-</ul>  
+<div class="card card-outline-primary bg-light m-1 p-1">
+    <div class="bg-faded p-1">
+        <ul>
+            <li>Hair: @b.Hair</li>
+            <li>Sex: @b.Sex</li>
+            <li>Length: @b.Length</li>
+            <li>Date of Excavation: @b.Dateofexcavation</li>
+        </ul>
+    </div>
+        <form method="post" />
+
+
+            <input type="hidden"  />
+            <span class="card-text">
+                <button type="submit"
+                    class="btn btn-outline-primary btn-lg  " style="float:right">
+                    Details
+                </button>
+            </span>
+       
+</div>
 }
 <br />
 
