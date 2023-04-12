@@ -80,16 +80,17 @@ namespace Intex2Group22.Controllers
             return View();
         }
 
-        public IActionResult allMummies(int pageNum = 1)
+        public IActionResult allMummies(string haircolor, string sex, string depth, int pageNum = 1)
         {
             int pageSize = 10;
             var x = new MummiesViewModel
             {
                 Burialmains = repo.Burialmains
-                .OrderBy(b => b.Id)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize).ToList(),
-
+                    .Where(b => (b.Haircolor == haircolor || string.IsNullOrEmpty(haircolor)) && (b.Sex == sex || string.IsNullOrEmpty(sex)) && (b.Depth == depth || string.IsNullOrEmpty(depth)))
+                    .OrderBy(b => b.Id)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList(),
                 PageInfo = new PageInfo
                 {
                     TotalNumMummies = repo.Burialmains.Count(),
@@ -97,10 +98,11 @@ namespace Intex2Group22.Controllers
                     CurrentPage = pageNum
                 }
             };
-       
+            ViewBag.SelectedHairColor = haircolor;
+            ViewBag.SelectedSex = sex;
             return View(x);
         }
-           
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

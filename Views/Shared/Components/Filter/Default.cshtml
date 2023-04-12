@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@foreach (string h in ViewBag.HairColors)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@h" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest" 
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(h == ViewBag.SelectedType
+           ? "btn-primary": "btn-outline-secondary")">@h</a>
+}
+@foreach (string s in ViewBag.Sexes)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@s" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(s == ViewBag.SelectedSex
+           ? "btn-primary": "btn-outline-secondary")">@s</a>
+}
+
+@foreach (string d in ViewBag.Depths)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@d" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(d == ViewBag.SelectedDepth
+           ? "btn-primary": "btn-outline-secondary")">@d</a>
+}
+
+@foreach (string hd in ViewBag.HeadDirections)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@hd"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(hd == ViewBag.SelectedHeadDirection
+           ? "btn-primary": "btn-outline-secondary")">@hd</a>
+}
+
+@foreach (string a in ViewBag.AgesAtDeath)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@a" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(a == ViewBag.SelectedHeadDirection
+           ? "btn-primary": "btn-outline-secondary")">@a</a>
+}
+
+@foreach (string s in ViewBag.SquaresNorthSouth)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@s" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(s == ViewBag.SelectedSquareNorthSouth
+           ? "btn-primary": "btn-outline-secondary")">@s</a>
+}
+
+@foreach (string n in ViewBag.NorthSouth)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@n" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(n == ViewBag.SelectedNorthSouth
+           ? "btn-primary": "btn-outline-secondary")">@n</a>
+}
+
+@foreach (string e in ViewBag.SquaresEastWest)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@e"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(e == ViewBag.SelectedSquareEastWest
+           ? "btn-primary": "btn-outline-secondary")">@e</a>
+}
+
+@foreach (string ew in ViewBag.EastWest)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ew" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(ew == ViewBag.SelectedEastWest
+           ? "btn-primary": "btn-outline-secondary")">@ew</a>
+}
+
+@foreach (string a in ViewBag.Areas)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@a" asp-route-burialnumber="@ViewBag.SelectedBurialNumber" asp-route-pageNum="1" class="btn btn-block
+       @(a == ViewBag.SelectedArea
+           ? "btn-primary": "btn-outline-secondary")">@a</a>
+}
+
+@foreach (string b in ViewBag.BurialNumbers)
+{
+    <a asp-controller="Home" asp-action="allMummies" asp-route-haircolor="@ViewBag.SelectedHairColor" asp-route-sex="@ViewBag.SelectedSex" asp-route-depth="@ViewBag.SelectedDepth" asp-route-headdirection="@ViewBag.SelectedHeadDirection"
+   asp-route-ageatdeath="@ViewBag.SelectedAgeAtDeath" asp-route-squarenorthsouth="@ViewBag.SelectedSquareNorthSouth" asp-route-northsouth="@ViewBag.SelectedNorthSouth" asp-route-squareeastwest="@ViewBag.SelectedSquareEastWest"
+   asp-route-eastwest="@ViewBag.SelectedEastWest" asp-route-area="@ViewBag.SelectedArea" asp-route-burialnumber="@b" asp-route-pageNum="1" class="btn btn-block
+       @(b == ViewBag.SelectedBurialNumber
+           ? "btn-primary": "btn-outline-secondary")">@b</a>
+}
+
