@@ -16,6 +16,7 @@
     <li>Date of Excavation: @b.Dateofexcavation</li>
 </ul>  
         <a asp-controller="Home" asp-action="Edit" asp-route-formid="@b.Id">Edit</a>
+            <a href="@Url.Action("Edit", "Home", new { formid = b.Id })">Edit</a>
     <a asp-controller="Home" asp-action="Delete" asp-route-formid="@b.Id">Delete</a>
 <br />
 </div>

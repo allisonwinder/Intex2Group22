@@ -61,7 +61,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int formid)
+        public IActionResult Edit(long formid)
         {
             //ViewBag.Majors but change = repo.ToList();
             var form = repo.Burialmains.Single(x => x.Id == formid);
@@ -110,7 +110,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int formid)
+        public IActionResult Delete(long formid)
         {
             var forms = repo.Burialmains.Single(x => x.Id == formid);
             return View("Delete", forms);
