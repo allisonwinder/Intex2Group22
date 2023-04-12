@@ -65,14 +65,15 @@ namespace Intex2Group22.Controllers
         {
             //ViewBag.Majors but change = repo.ToList();
             var form = repo.Burialmains.Single(x => x.Id == formid);
-            return View("AddForm", form);
+            return View("EditForm", form);
         }
 
         [HttpPost]
         public IActionResult Edit(Burialmain bm)
         {
-            repo.Update(bm);
+            repo.Burialmains.Update(bm);
             repo.SaveChanges();
+
             return RedirectToAction("allMummies");
         }
         public IActionResult Privacy()
@@ -109,10 +110,10 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int formid)
         {
-            var ids = repo.Burialmains.Single(x => x.Id == id);
-            return View(ids);
+            var forms = repo.Burialmains.Single(x => x.Id == formid);
+            return View("Delete", forms);
         }
 
         [HttpPost]

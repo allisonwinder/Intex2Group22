@@ -22,6 +22,12 @@ namespace Intex2Group22.Models
         public virtual DbSet<ArtifactfagelgamousregisterBurialmain> ArtifactfagelgamousregisterBurialmains { get; set; } = null!;
         public virtual DbSet<Artifactkomaushimregister> Artifactkomaushimregisters { get; set; } = null!;
         public virtual DbSet<ArtifactkomaushimregisterBurialmain> ArtifactkomaushimregisterBurialmains { get; set; } = null!;
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; } = null!;
+        public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; } = null!;
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; } = null!;
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
+        public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<Biological> Biologicals { get; set; } = null!;
         public virtual DbSet<BiologicalC14> BiologicalC14s { get; set; } = null!;
         public virtual DbSet<Bodyanalysischart> Bodyanalysischarts { get; set; } = null!;
@@ -39,6 +45,7 @@ namespace Intex2Group22.Models
         public virtual DbSet<DecorationTextile> DecorationTextiles { get; set; } = null!;
         public virtual DbSet<Dimension> Dimensions { get; set; } = null!;
         public virtual DbSet<DimensionTextile> DimensionTextiles { get; set; } = null!;
+        public virtual DbSet<Master> Masters { get; set; } = null!;
         public virtual DbSet<Newsarticle> Newsarticles { get; set; } = null!;
         public virtual DbSet<PhotodataTextile> PhotodataTextiles { get; set; } = null!;
         public virtual DbSet<Photodatum> Photodata { get; set; } = null!;
@@ -56,7 +63,7 @@ namespace Intex2Group22.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseNpgsql("User ID=postgres;Password=password;Database=intexmummies;Server=intexmummies.czciqxxxykge.us-east-1.rds.amazonaws.com;Port=5432;");
             }
         }
@@ -218,6 +225,93 @@ namespace Intex2Group22.Models
                 entity.Property(e => e.MainBurialmainid).HasColumnName("main$burialmainid");
             });
 
+            modelBuilder.Entity<AspNetRole>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Name).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<AspNetRoleClaim>(entity =>
+            {
+                entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.AspNetRoleClaims)
+                    .HasForeignKey(d => d.RoleId);
+            });
+
+            modelBuilder.Entity<AspNetUser>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
+
+                entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+
+                entity.HasMany(d => d.Roles)
+                    .WithMany(p => p.Users)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "AspNetUserRole",
+                        l => l.HasOne<AspNetRole>().WithMany().HasForeignKey("RoleId"),
+                        r => r.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId"),
+                        j =>
+                        {
+                            j.HasKey("UserId", "RoleId");
+
+                            j.ToTable("AspNetUserRoles");
+
+                            j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
+                        });
+            });
+
+            modelBuilder.Entity<AspNetUserClaim>(entity =>
+            {
+                entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserClaims)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserLogin>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+
+                entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
+
+                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+
+                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserLogins)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserToken>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+
+                entity.Property(e => e.Name).HasMaxLength(128);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserTokens)
+                    .HasForeignKey(d => d.UserId);
+            });
+
             modelBuilder.Entity<Biological>(entity =>
             {
                 entity.ToTable("biological");
@@ -299,7 +393,7 @@ namespace Intex2Group22.Models
                     .HasColumnName("eastwest");
 
                 entity.Property(e => e.Estimatestature)
-                    .HasColumnType("character varying")
+                    .HasMaxLength(10)
                     .HasColumnName("estimatestature");
 
                 entity.Property(e => e.Femur)
@@ -457,19 +551,19 @@ namespace Intex2Group22.Models
                 entity.ToTable("burialmain");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Adultsubadult)
-                    .HasMaxLength(200)
+                    .HasMaxLength(10)
                     .HasColumnName("adultsubadult");
 
                 entity.Property(e => e.Ageatdeath)
-                    .HasMaxLength(200)
+                    .HasMaxLength(3)
                     .HasColumnName("ageatdeath");
 
                 entity.Property(e => e.Area)
-                    .HasMaxLength(200)
+                    .HasMaxLength(3)
                     .HasColumnName("area");
 
                 entity.Property(e => e.Burialid)
@@ -501,7 +595,7 @@ namespace Intex2Group22.Models
                     .HasColumnName("depth");
 
                 entity.Property(e => e.Eastwest)
-                    .HasMaxLength(200)
+                    .HasMaxLength(10)
                     .HasColumnName("eastwest");
 
                 entity.Property(e => e.Excavationrecorder)
@@ -509,7 +603,7 @@ namespace Intex2Group22.Models
                     .HasColumnName("excavationrecorder");
 
                 entity.Property(e => e.Facebundles)
-                    .HasMaxLength(200)
+                    .HasMaxLength(10)
                     .HasColumnName("facebundles");
 
                 entity.Property(e => e.Fieldbookexcavationyear)
@@ -533,7 +627,7 @@ namespace Intex2Group22.Models
                     .HasColumnName("haircolor");
 
                 entity.Property(e => e.Headdirection)
-                    .HasMaxLength(200)
+                    .HasMaxLength(10)
                     .HasColumnName("headdirection");
 
                 entity.Property(e => e.Length)
@@ -541,7 +635,7 @@ namespace Intex2Group22.Models
                     .HasColumnName("length");
 
                 entity.Property(e => e.Northsouth)
-                    .HasMaxLength(200)
+                    .HasMaxLength(3)
                     .HasColumnName("northsouth");
 
                 entity.Property(e => e.Photos)
@@ -557,7 +651,7 @@ namespace Intex2Group22.Models
                     .HasColumnName("samplescollected");
 
                 entity.Property(e => e.Sex)
-                    .HasMaxLength(200)
+                    .HasMaxLength(3)
                     .HasColumnName("sex");
 
                 entity.Property(e => e.Shaftnumber)
@@ -593,7 +687,7 @@ namespace Intex2Group22.Models
                     .HasColumnName("westtohead");
 
                 entity.Property(e => e.Wrapping)
-                    .HasMaxLength(200)
+                    .HasMaxLength(3)
                     .HasColumnName("wrapping");
             });
 
@@ -718,7 +812,7 @@ namespace Intex2Group22.Models
                 entity.Property(e => e.Colorid).HasColumnName("colorid");
 
                 entity.Property(e => e.Value)
-                    .HasMaxLength(500)
+                    .HasMaxLength(100)
                     .HasColumnName("value");
             });
 
@@ -865,6 +959,13 @@ namespace Intex2Group22.Models
                 entity.Property(e => e.MainDimensionid).HasColumnName("main$dimensionid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+            });
+
+            modelBuilder.Entity<Master>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("master");
             });
 
             modelBuilder.Entity<Newsarticle>(entity =>
@@ -1082,7 +1183,7 @@ namespace Intex2Group22.Models
                 entity.Property(e => e.Textilefunctionid).HasColumnName("textilefunctionid");
 
                 entity.Property(e => e.Value)
-                    .HasMaxLength(200)
+                    .HasMaxLength(100)
                     .HasColumnName("value");
             });
 
