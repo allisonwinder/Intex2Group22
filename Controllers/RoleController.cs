@@ -11,5 +11,10 @@ namespace Intex2Group22.Controllers
         {
             return View();
         }
+        [Authorize(Policy = "RequireAdmin")]
+        public IActionResult Admin()
+        {
+            return View();
+        }
     }
 }
