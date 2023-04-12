@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Intex2Group22.Migrations.intexmummies
 {
     [DbContext(typeof(intexmummiesContext))]
-    [Migration("20230411200552_thisisit")]
-    partial class thisisit
+    [Migration("20230412180058_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,21 @@ namespace Intex2Group22.Migrations.intexmummies
             modelBuilder.HasSequence("system$filedocument_fileid_mxseq");
 
             modelBuilder.HasSequence("system$queuedtask_sequence_mxseq");
+
+            modelBuilder.Entity("AspNetUserRole", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
 
             modelBuilder.Entity("Intex2Group22.Models.Analysis", b =>
                 {
@@ -227,6 +242,186 @@ namespace Intex2Group22.Migrations.intexmummies
                     b.ToTable("artifactkomaushimregister_burialmain", (string)null);
                 });
 
+            modelBuilder.Entity("Intex2Group22.Models.AspNetRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "NormalizedName" }, "RoleNameIndex")
+                        .IsUnique();
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetRoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "RoleId" }, "IX_AspNetRoleClaims_RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "NormalizedEmail" }, "EmailIndex");
+
+                    b.HasIndex(new[] { "NormalizedUserName" }, "UserNameIndex")
+                        .IsUnique();
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetUserClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "UserId" }, "IX_AspNetUserClaims_UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetUserLogin", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex(new[] { "UserId" }, "IX_AspNetUserLogins_UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetUserToken", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
+
             modelBuilder.Entity("Intex2Group22.Models.Biological", b =>
                 {
                     b.Property<long>("Id")
@@ -319,7 +514,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("eastwest");
 
                     b.Property<string>("Estimatestature")
-                        .HasColumnType("character varying")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("estimatestature");
 
                     b.Property<string>("Femur")
@@ -512,22 +708,25 @@ namespace Intex2Group22.Migrations.intexmummies
             modelBuilder.Entity("Intex2Group22.Models.Burialmain", b =>
                 {
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<long>("Id"));
+
                     b.Property<string>("Adultsubadult")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("adultsubadult");
 
                     b.Property<string>("Ageatdeath")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)")
                         .HasColumnName("ageatdeath");
 
                     b.Property<string>("Area")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)")
                         .HasColumnName("area");
 
                     b.Property<string>("Burialid")
@@ -564,8 +763,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("depth");
 
                     b.Property<string>("Eastwest")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("eastwest");
 
                     b.Property<string>("Excavationrecorder")
@@ -574,8 +773,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("excavationrecorder");
 
                     b.Property<string>("Facebundles")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("facebundles");
 
                     b.Property<string>("Fieldbookexcavationyear")
@@ -604,8 +803,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("haircolor");
 
                     b.Property<string>("Headdirection")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("headdirection");
 
                     b.Property<string>("Length")
@@ -614,8 +813,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("length");
 
                     b.Property<string>("Northsouth")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)")
                         .HasColumnName("northsouth");
 
                     b.Property<string>("Photos")
@@ -634,8 +833,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("samplescollected");
 
                     b.Property<string>("Sex")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)")
                         .HasColumnName("sex");
 
                     b.Property<string>("Shaftnumber")
@@ -679,8 +878,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("westtohead");
 
                     b.Property<string>("Wrapping")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)")
                         .HasColumnName("wrapping");
 
                     b.HasKey("Id");
@@ -834,8 +1033,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("colorid");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("value");
 
                     b.HasKey("Id");
@@ -1026,6 +1225,11 @@ namespace Intex2Group22.Migrations.intexmummies
                     b.HasIndex(new[] { "MainTextileid", "MainDimensionid" }, "idx_main$dimension_textile_main$textile_main$dimension");
 
                     b.ToTable("dimension_textile", (string)null);
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.Master", b =>
+                {
+                    b.ToTable("master", (string)null);
                 });
 
             modelBuilder.Entity("Intex2Group22.Models.Newsarticle", b =>
@@ -1287,8 +1491,8 @@ namespace Intex2Group22.Migrations.intexmummies
                         .HasColumnName("textilefunctionid");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("value");
 
                     b.HasKey("Id");
@@ -1385,6 +1589,79 @@ namespace Intex2Group22.Migrations.intexmummies
                     b.HasIndex(new[] { "MainTextileid", "MainYarnmanipulationid" }, "idx_main$yarnmanipulation_textile");
 
                     b.ToTable("yarnmanipulation_textile", (string)null);
+                });
+
+            modelBuilder.Entity("AspNetUserRole", b =>
+                {
+                    b.HasOne("Intex2Group22.Models.AspNetRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Intex2Group22.Models.AspNetUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetRoleClaim", b =>
+                {
+                    b.HasOne("Intex2Group22.Models.AspNetRole", "Role")
+                        .WithMany("AspNetRoleClaims")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetUserClaim", b =>
+                {
+                    b.HasOne("Intex2Group22.Models.AspNetUser", "User")
+                        .WithMany("AspNetUserClaims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetUserLogin", b =>
+                {
+                    b.HasOne("Intex2Group22.Models.AspNetUser", "User")
+                        .WithMany("AspNetUserLogins")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetUserToken", b =>
+                {
+                    b.HasOne("Intex2Group22.Models.AspNetUser", "User")
+                        .WithMany("AspNetUserTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetRole", b =>
+                {
+                    b.Navigation("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Intex2Group22.Models.AspNetUser", b =>
+                {
+                    b.Navigation("AspNetUserClaims");
+
+                    b.Navigation("AspNetUserLogins");
+
+                    b.Navigation("AspNetUserTokens");
                 });
 #pragma warning restore 612, 618
         }
