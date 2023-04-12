@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewData["Title"] = "Add a Mummy";
+}
+
+@model Burialmain
+
+
+<form method="post">
+    <label asp-for="Squarenorthsouth">Square North South: </label>
+    <input asp-for="Squarenorthsouth"/>
+
+    <label asp-for="Northsouth">North South: </label>
+    <input asp-for="Northsouth" />
+
+    <label asp-for="Squareeastwest">Square East West</label>
+    <input asp-for="Squareeastwest" />
+
+    <label asp-for="Eastwest">East West: </label>
+    <input asp-for="Eastwest" />
+
+    <label asp-for="Area">Area: </label>
+    <input asp-for="Area" />
+
+    <label asp-for="Burialnumber">Burial Number: </label>
+    <input asp-for="Burialnumber" />
+
+    <label asp-for="Headdirection">Head Direction: </label>
+    <input asp-for="Headdirection" />
+
+    <label asp-for="Depth">Depth: </label>
+    <input asp-for="Depth" />
+
+    <label asp-for="Adultsubadult">Adult or Child: </label>
+    <select asp-for="Adultsubadult">
+        <option value="A">Adult</option>
+        <option value="C">Child</option>
+        <option value="I">Infant</option>
+        <option value="N">Newborn</option>
+    </select>
+
+    <label asp-for="Sex">Sex: </label>
+    <select asp-for="Sex">
+        <option value="M">M</option>
+        <option value="F">F</option> 
+    </select>
+
+    <label asp-for=Facebundles>Facebundles: </label>
+    <input asp-for="Facebundles" />
+
+    <label asp-for="Southtohead">South to Head: </label>
+    <input asp-for="Southtohead" />
+
+    <label asp-for="Westtohead">West to Head: </label>
+    <input asp-for="Westtohead" />
+
+    <label asp-for="Preservation">Preservation: </label>
+    <input asp-for="Preservation" />
+
+    <label asp-for="Fieldbookpage">Fieldbook Page:</label>
+    <input asp-for="Fieldbookpage" />
+
+    <label asp-for="Goods">Goods: </label>
+    <input asp-for="Goods" />
+
+    <label asp-for="Text">Text: </label>
+    <input asp-for="Text" />
+
+    <label asp-for="Wrapping">Wrapping: </label>
+    <select asp-for="Wrapping">
+        <option value="W">Full or nearly Full Wrapping</option>
+        <option value="H">Partial Wrapping</option>
+        <option value="B">Bones or only Partial</option>
+        <option value="U">Unknown</option>
+    </select>
+
+    <label asp-for="Haircolor">Hair Color:</label>
+    <select asp-for="Haircolor">
+        <option value="B">Brown</option>
+        <option value="K">Black</option>
+        <option value="A">Brown-Red</option>
+        <option value="R">Red</option>
+        <option value="D">Blonde</option>
+        <option value="U">Unknown</option>
+    </select>
+
+    <label asp-for="Samplescollected">Samples Collected: </label>
+    <input asp-for="Samplescollected" />
+
+    <label asp-for="Length">Length: </label>
+    <input asp-for="Length"/>
+
+    <label asp-for="Burialid">Burial Id: </label>
+    <input asp-for="Burialid" />
+
+    <label asp-for="Dataexpertinitials">Data Expert Initials: </label>
+    <input asp-for="Dataexpertinitials" />
+
+    <label asp-for="Westtofeet">West to Feet: </label>
+    <input asp-for="Westtofeet" />
+
+    <label asp-for="Ageatdeath">Age at Death: </label>
+    <input asp-for="Ageatdeath" />
+
+    <label asp-for="Southtofeet">South to Feet: </label>
+    <input asp-for="Southtofeet" />
+
+    <label asp-for="Excavationrecorder">Excavation Recorder: </label>
+    <input asp-for="Excavationrecorder" />
+
+    <label asp-for="Hair">Hair: </label>
+    <input asp-for="Hair" />
+
+    <label asp-for="Burialmaterials">Burial Materials: </label>
+    <input asp-for="Burialmaterials" />
+
+    <label asp-for="Dateofexcavation">Date of Excavation</label>
+    <input asp-for="Dateofexcavation" />
+
+    <label asp-for="Fieldbookexcavationyear">Fieldbook Excavation Year: </label>
+    <input asp-for="Fieldbookexcavationyear" />
+
+    <label asp-for="Clusternumber">Cluster Number: </label>
+    <input asp-for="Clusternumber" />
+
+    <label asp-for="Shaftnumber">Shaft Number:</label>
+    <input asp-for="Shaftnumber" />
+    
+    <button type="submit">Submit Mummy</button>
+
+</form>

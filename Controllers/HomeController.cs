@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Intex2Group22.Controllers
 {
@@ -22,11 +25,46 @@ namespace Intex2Group22.Controllers
             return View();
         }
 
+        public IActionResult UnsupervisedModel()
+        {
+            return View();
+        }
+
+        public IActionResult SupervisedModel()
+        {
+            return View();
+        }
+
+
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult AddForm()
+        {
+            //ViewBag.Categories = repo.Categories.ToList()
+            ;
+            return View();
+                }
+
+        [HttpPost]
+        public IActionResult AddForm(Burialmain bm)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.Add(bm);
+                repo.SaveChanges();
+                return View("Confirmation", bm);
+            }
+            else
+            {
+                //ViewBag.Categories = repo.Categories.ToList();
+                return View(bm);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int formid)
         {
             //ViewBag.Majors but change = repo.ToList();
-            var form = repo.Burialmains.Single(x => x.Id == id);
+            var form = repo.Burialmains.Single(x => x.Id == formid);
             return View("AddForm", form);
         }
 
