@@ -22,19 +22,22 @@ namespace Intex2Group22.Controllers
         {
             repo = temp;
         }
-
+        int visits = 0;
         public IActionResult Index()
         {
             //// update the visits counter
             //var visitString = Request.Cookies["visits"];
-            //int visit = 0;
+            
             //int.TryParse(visitString, out visits);
             //visits++;
 
             //Response.Cookies.Append("visits", visits.ToString());
 
-            //ViewBag.visits = visitString;
+            //ViewBag.visits = visits;
 
+            ////CookieOptions options = new CookieOptions();
+            ////options.Expires = DateTime.Now.AddDays(365);
+            ////Respo
             return View();
         }
 
@@ -60,6 +63,8 @@ namespace Intex2Group22.Controllers
                 }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
+
         public IActionResult AddForm(Burialmain bm)
         {
             if (ModelState.IsValid)
@@ -76,6 +81,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Edit(long formid)
         {
             //ViewBag.Majors but change = repo.ToList();
@@ -84,6 +90,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")] //limit certain actions to the Administrators
         public IActionResult Edit(Burialmain bm)
         {
             repo.Burialmains.Update(bm);
@@ -127,6 +134,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Delete(long formid)
         {
             var forms = repo.Burialmains.Single(x => x.Id == formid);

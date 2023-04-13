@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Intex2Group22.Core;
+@{
 }
 
 @model MummiesViewModel
@@ -24,9 +25,12 @@
             <li>Sex: @b.Sex</li>
             <li>Length: @b.Length</li>
             <li>Date of Excavation: @b.Dateofexcavation</li>
-        </ul>  
-                <a asp-controller="Home" asp-action="Edit" asp-route-formid="@b.Id">Edit</a>
+        </ul>
+        @if (User.IsInRole(RoleConstants.Roles.Administrator))
+        {
+            <a asp-controller="Home" asp-action="Edit" asp-route-formid="@b.Id">Edit</a>
             <a asp-controller="Home" asp-action="Delete" asp-route-formid="@b.Id">Delete</a>
+        }
         <br />
     </div>
             <span class="card-text">
