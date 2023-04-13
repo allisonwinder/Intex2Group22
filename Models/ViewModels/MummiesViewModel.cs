@@ -3,7 +3,7 @@
     public class MummiesViewModel
     {
         
-        public List<Burialmain> Burialmains { get; set; }
+        public IQueryable<Burialmain> Burialmains { get; set; }
         public PageInfo PageInfo { get; set; }
     }
 }
