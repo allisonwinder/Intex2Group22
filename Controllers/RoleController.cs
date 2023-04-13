@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Intex2Group22.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -11,7 +12,8 @@ namespace Intex2Group22.Controllers
         {
             return View();
         }
-        [Authorize(Policy = "RequireAdmin")]
+
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Admin()
         {
             return View();
