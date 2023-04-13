@@ -29,15 +29,11 @@
             <a asp-controller="Home" asp-action="Delete" asp-route-formid="@b.Id">Delete</a>
         <br />
     </div>
-        <form method="post" />
-
-
-            <input type="hidden"  />
             <span class="card-text">
-                <button type="submit"
+                <a asp-controller="Home" asp-action="Details" asp-route-formid="@b.Id"
                     class="btn btn-outline-primary btn-lg  " style="float:right">
                     Details
-                </button>
+                </a>
             </span>
        
 </div>
