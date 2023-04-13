@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
+
+using Microsoft.EntityFrameworkCore;
+using Intex2Group22.Core;
 
 namespace Intex2Group22.Controllers
 {
@@ -22,6 +25,16 @@ namespace Intex2Group22.Controllers
 
         public IActionResult Index()
         {
+            //// update the visits counter
+            //var visitString = Request.Cookies["visits"];
+            //int visit = 0;
+            //int.TryParse(visitString, out visits);
+            //visits++;
+
+            //Response.Cookies.Append("visits", visits.ToString());
+
+            //ViewBag.visits = visitString;
+
             return View();
         }
 
@@ -37,6 +50,8 @@ namespace Intex2Group22.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddForm()
         {
             //ViewBag.Categories = repo.Categories.ToList()

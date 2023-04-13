@@ -137,6 +137,11 @@ namespace Intex2Group22.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                     //// case (firstname + ' ' + lastname)
+
+                     //       if Korbin Derr
+                     //       _userManager.AddToRoleAsync(user, "Admin")
+
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
