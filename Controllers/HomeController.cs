@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
+
+using Microsoft.EntityFrameworkCore;
+using Intex2Group22.Core;
 
 namespace Intex2Group22.Controllers
 {
@@ -22,6 +25,16 @@ namespace Intex2Group22.Controllers
 
         public IActionResult Index()
         {
+            //// update the visits counter
+            //var visitString = Request.Cookies["visits"];
+            //int visit = 0;
+            //int.TryParse(visitString, out visits);
+            //visits++;
+
+            //Response.Cookies.Append("visits", visits.ToString());
+
+            //ViewBag.visits = visitString;
+
             return View();
         }
 
@@ -37,6 +50,8 @@ namespace Intex2Group22.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddForm()
         {
             //ViewBag.Categories = repo.Categories.ToList()
@@ -84,7 +99,7 @@ namespace Intex2Group22.Controllers
         [HttpGet]
         public IActionResult allMummies(int pageNum = 1)
         {
-            int pageSize = 10;
+            int pageSize = 50;
             var x = new MummiesViewModel
             {
                 Burialmains = repo.Burialmains
@@ -169,6 +184,115 @@ namespace Intex2Group22.Controllers
             repo.SaveChanges();
 
             return RedirectToAction("allMummies");
+        }
+
+        
+        public IActionResult Check(int pageNum=1)
+        {
+            int pageSize = 50;
+
+            var joinData = from bm in repo.Burialmains
+                           join bmt in repo.BurialmainTextiles on bm.Id equals bmt.MainBurialmainid into bmtGroup
+                           from bmtLeft in bmtGroup.DefaultIfEmpty()
+                           join t in repo.Textiles on (bmtLeft != null ? bmtLeft.MainTextileid : -1) equals t.Id into tGroup
+                           from tLeft in tGroup.DefaultIfEmpty()
+                           select new BurialTextileData
+                           {
+                               BurialId = bm.Id,
+                               ExcavationYear = bm.Fieldbookexcavationyear,
+                               TextileId = tLeft != null ? tLeft.Id : 0,
+                               TextileName = tLeft != null ? tLeft.Description : null,
+                               Area = bm.Area,
+                               Sex = bm.Sex
+                           };
+
+            return View(joinData);
+        }
+
+
+        
+        public IActionResult Details(long formid)
+        {
+
+            Burialmain burial = (from b in repo.Burialmains
+                                 where b.Id == formid
+                                 select b).SingleOrDefault() ?? new Burialmain();
+
+
+            List<Color> colors = (from c in repo.Colors
+                                  join ct in repo.ColorTextiles on c.Id equals ct.MainColorid
+                                  join t in repo.Textiles on ct.MainTextileid equals t.Id
+                                  join bt in repo.BurialmainTextiles on t.Id equals bt.MainTextileid into bt_temp
+                                  from bt in bt_temp.DefaultIfEmpty()
+                                  join b in repo.Burialmains on bt.MainBurialmainid equals b.Id into b_temp
+                                  from b in b_temp.DefaultIfEmpty()
+                                  where b.Id == formid
+                                  select c ?? new Color()).Distinct().ToList();
+
+
+            List<Textile> textiles = (from bt in repo.BurialmainTextiles
+                                      join t_join in repo.Textiles on bt.MainTextileid equals t_join.Id into t_temp
+                                      from t in t_temp.DefaultIfEmpty()
+                                      where bt.MainBurialmainid == formid
+                                      select t ?? new Textile()).ToList();
+
+
+            List<ColorTextile> coltexts = (from ct in repo.ColorTextiles
+                                           join t in repo.Textiles on ct.MainTextileid equals t.Id
+                                           join bt in repo.BurialmainTextiles on t.Id equals bt.MainTextileid into bt_temp
+                                           from bt in bt_temp.DefaultIfEmpty()
+                                           join b in repo.Burialmains on bt.MainBurialmainid equals b.Id into b_temp
+                                           from b in b_temp.DefaultIfEmpty()
+                                           where b.Id == formid
+                                           select ct ?? new ColorTextile()).Distinct().ToList();
+
+            List<TextilefunctionTextile> functstexts = (from tft in repo.TextilefunctionTextiles
+                                                        join t in repo.Textiles on tft.MainTextileid equals t.Id
+                                                        join bt in repo.BurialmainTextiles on t.Id equals bt.MainTextileid into bt_temp
+                                                        from bt in bt_temp.DefaultIfEmpty()
+                                                        join b in repo.Burialmains on bt.MainBurialmainid equals b.Id into b_temp
+                                                        from b in b_temp.DefaultIfEmpty()
+                                                        where b.Id == formid
+                                                        select tft ?? new TextilefunctionTextile()).Distinct().ToList();
+
+            List<Textilefunction> textilefunctions = (from tf in repo.Textilefunctions
+                                                      join tft in repo.TextilefunctionTextiles on tf.Id equals tft.MainTextilefunctionid
+                                                      join t in repo.Textiles on tft.MainTextileid equals t.Id
+                                                      join bt in repo.BurialmainTextiles on t.Id equals bt.MainTextileid into bt_temp
+                                                      from bt in bt_temp.DefaultIfEmpty()
+                                                      join b in repo.Burialmains on bt.MainBurialmainid equals b.Id into b_temp
+                                                      from b in b_temp.DefaultIfEmpty()
+                                                      where b.Id == formid
+                                                      select tf ?? new Textilefunction()).Distinct().ToList();
+            List<Structure> structures = (from s in repo.Structures
+                                          join st in repo.StructureTextiles on s.Id equals st.MainStructureid
+                                          join t in repo.Textiles on st.MainTextileid equals t.Id
+                                          join bt in repo.BurialmainTextiles on t.Id equals bt.MainTextileid into bt_temp
+                                          from bt in bt_temp.DefaultIfEmpty()
+                                          join b in repo.Burialmains on bt.MainBurialmainid equals b.Id into b_temp
+                                          from b in b_temp.DefaultIfEmpty()
+                                          where b.Id == formid
+                                          select s ?? new Structure()).Distinct().ToList();
+
+            List<StructureTextile> structexts = (from st in repo.StructureTextiles
+                                                 join t in repo.Textiles on st.MainTextileid equals t.Id
+                                                 join bt in repo.BurialmainTextiles on t.Id equals bt.MainTextileid into bt_temp
+                                                 from bt in bt_temp.DefaultIfEmpty()
+                                                 join b in repo.Burialmains on bt.MainBurialmainid equals b.Id into b_temp
+                                                 from b in b_temp.DefaultIfEmpty()
+                                                 where b.Id == formid
+                                                 select st ?? new StructureTextile()).Distinct().ToList();
+
+            List<Bodyanalysischart> charts = (from bac in repo.Bodyanalysischarts
+                                              join b in repo.Burialmains on bac.Burialid equals b.Burialid into b_temp
+                                              from b in b_temp.DefaultIfEmpty()
+                                              where b.Id == formid
+                                              select bac ?? new Bodyanalysischart()).Distinct().ToList();
+
+            DetailsViewModel data = new DetailsViewModel(burial, textiles, colors, coltexts,
+                structexts, structures, functstexts, textilefunctions, charts);
+
+            return View(data);
         }
 
     }

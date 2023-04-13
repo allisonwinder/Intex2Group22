@@ -1,4 +1,3 @@
-//using Intex2Group22.Areas.Identity.Data;
 using Intex2Group22.Controllers;
 using Intex2Group22.Models;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +5,9 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Intex2Group22.Areas.Identity.Data;
 using Microsoft.VisualBasic;
+using Intex2Group22.Core;
+using Intex2Group22.Core.Repositories;
+using Intex2Group22.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -35,6 +37,8 @@ builder.Services.AddControllersWithViews();
 AddAuthorizationPolicies(builder.Services);
 
 #endregion
+
+AddScoped();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
@@ -106,7 +110,14 @@ void AddAuthorizationPolicies(IServiceCollection services)
 
     builder.Services.AddAuthorization(options =>
     {
-        options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Administrator"));
+        options.AddPolicy(RoleConstants.Policies.RequireAdmin, policy => policy.RequireRole(RoleConstants.Roles.Administrator));
        
     });
+}
+
+void AddScoped()
+{
+    builder.Services.AddScoped<IUserRepository, UserRepository>();
+    builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 }

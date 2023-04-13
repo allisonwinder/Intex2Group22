@@ -1,4 +1,70 @@
 ﻿@{
     ViewData["Title"] = "Details";
 }
-@model Burialmain
+@model DetailsViewModel
+
+
+    <h1>Mummy Identification Number: @Model.burial.Id</h1>
+    
+    <br />
+    <p>Age Group: @Model.burial.Adultsubadult</p>
+    <br />
+
+    @foreach (Textile t in Model.textiles)
+    {
+       <p>Textile Description: @t.Description</p>
+        <p>Locality: @t.Locale</p>
+        <p>Directions: @t.Direction</p>
+        @foreach (ColorTextile ct in Model.coltexts)
+        {
+            @if (t.Id == ct.MainTextileid)
+            {
+                @foreach(Color c in Model.colors)
+                {
+                    @if (c.Id == ct.MainColorid)
+                    {
+                       <p>Textile Color: @c.Value</p>
+                    }   
+                }
+            }
+        }
+
+        @foreach (TextilefunctionTextile tft in Model.functstexts)
+        {
+            @if (t.Id == tft.MainTextileid)
+            {
+                @foreach (Textilefunction tf in Model.textilefunctions)
+                {
+                    @if (tf.Id == tft.MainTextilefunctionid)
+                    {
+                        <p>Function: @tf.Value</p>
+                    }
+                }
+            }
+        }
+    @foreach (StructureTextile st in Model.structexts)
+    {
+        @if (t.Id == st.MainTextileid)
+        {
+            @foreach (Structure s in Model.structures)
+            {
+                @if (st.MainStructureid == s.Id)
+                {
+                    <p>Structure: @s.Value</p>
+                }
+            }
+        }
+    }
+    <br /><br />
+        
+    }
+
+    @foreach (Bodyanalysischart bac in Model.charts)
+{
+    <p>BurialId: @bac.Burialid</p>
+    <p>Area: @bac.Area</p>
+}
+<br />
+
+<a class="btn btn-dark" asp-controller="Home" asp-action="allMummies">Back to Mummies</a>
+

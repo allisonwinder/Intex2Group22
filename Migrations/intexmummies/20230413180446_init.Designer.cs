@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Intex2Group22.Migrations.intexmummies
 {
     [DbContext(typeof(intexmummiesContext))]
-    [Migration("20230412180058_Init")]
-    partial class Init
+    [Migration("20230413180446_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
