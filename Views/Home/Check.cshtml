@@ -1,0 +1,42 @@
+﻿@{
+}
+
+@model IEnumerable<BurialTextileData>
+
+<h1 class="align-content-center">Mummies</h1>
+
+
+
+        @foreach (var b in Model)
+        {
+            <div class="card card-outline-primary bg-light m-1 p-1">
+                <div class="bg-faded p-1">
+
+                    <ul>
+                        <li>Id: @b.BurialId</li>
+                        <li>Textile Id: @b.TextileId</li>
+                        <li>Textile Name: @b.TextileName</li>
+                        <li>Sex: @b.Sex</li>
+                        <li>Area: @b.Area</li>
+                        <li>Date of Excavation: @b.ExcavationYear</li>
+                    </ul>
+@*                    <a asp-controller="Home" asp-action="Edit" asp-route-formid="@b.BuriaId">Edit</a>
+                    <a asp-controller="Home" asp-action="Delete" asp-route-formid="@b.Id">Delete</a>*@
+                    <br />
+                </div>
+                <span class="card-text">
+                    <a asp-controller="Home" asp-action="Details" asp-route-formid="@b.BurialId"
+                       class="btn btn-outline-primary btn-lg  " style="float:right">
+                        Details
+                    </a>
+                </span>
+
+            </div>
+        }
+
+
+@*        <div page-blah="@Model.PageInfo" page-action="Check" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-outline-dark"
+             page-class-selected="btn-secondary" class="btn-group pull-right m-1"></div>*@
+
+<a asp-controller="Home" asp-action="AddForm">Add</a>

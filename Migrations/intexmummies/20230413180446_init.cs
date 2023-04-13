@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Intex2Group22.Migrations.intexmummies
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
