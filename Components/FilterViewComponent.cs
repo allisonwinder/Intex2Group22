@@ -1,4 +1,5 @@
 ﻿using Intex2Group22.Models;
+using Intex2Group22.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intex2Group22.Components
@@ -12,76 +13,80 @@ namespace Intex2Group22.Components
         }
         public IViewComponentResult Invoke()
         {
-            var hairColors = repo.Burialmains
+            var hairColor = repo.Burialmains
+                .Where(x => x.Haircolor != null && x.Haircolor != "")
                 .Select(x => x.Haircolor)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            var sexes = repo.Burialmains
+                .Distinct();
+                
+
+            var sex = repo.Burialmains
+                .Where(x => x.Sex != null && x.Sex != "")
                 .Select(x => x.Sex)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            var depths = repo.Burialmains
+                .Distinct();
+
+            var depth = repo.Burialmains
+                .Where(x => x.Depth != null && x.Depth != "")
                 .Select(x => x.Depth)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            var headDirections = repo.Burialmains
+                .Distinct();
+
+            var headDirection = repo.Burialmains
+                .Where(x => x.Headdirection != null && x.Headdirection != "")
                 .Select(x => x.Headdirection)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            var agesAtDeath = repo.Burialmains
+                .Distinct();
+
+            var ageAtDeath = repo.Burialmains
+                .Where(x => x.Ageatdeath != null && x.Ageatdeath != "")
                 .Select(x => x.Ageatdeath)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            var squaresNorthSouth = repo.Burialmains
+                .Distinct();
+
+            var squareNorthSouth = repo.Burialmains
+                .Where(x => x.Squarenorthsouth != null && x.Squarenorthsouth != "")
                 .Select(x => x.Squarenorthsouth)
-                .Distinct() 
-                .OrderBy (x => x)
-                .ToList();
+                .Distinct();
+
             var northSouth = repo.Burialmains
+                .Where(x => x.Northsouth != null && x.Northsouth != "")
                 .Select(x => x.Northsouth)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            var squaresEeastWest = repo.Burialmains
+                .Distinct();
+
+            var squareEeastWest = repo.Burialmains
+                .Where(x => x.Squareeastwest != null && x.Squareeastwest != "")
                 .Select(x => x.Squareeastwest)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
+                .Distinct();
+
             var eastWest = repo.Burialmains
+                .Where(x => x.Eastwest != null && x.Eastwest != "")
                 .Select(x => x.Eastwest)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            var areas = repo.Burialmains
+                .Distinct();
+
+            var area = repo.Burialmains
+                .Where(x => x.Area != null && x.Area != "")
                 .Select(x => x.Area)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            var burialNumbers = repo.Burialmains
+                .Distinct();
+
+            var burialNumber = repo.Burialmains
+                .Where(x => x.Burialnumber != null && x.Burialnumber != "")
                 .Select(x => x.Burialnumber)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
+                .Distinct();
 
-            ViewBag.HairColors = hairColors;
-            ViewBag.Sexes = sexes;
-            ViewBag.Depths = depths;
-            ViewBag.HeadDirections = headDirections;
-            ViewBag.AgesAtDeath = agesAtDeath;
-            ViewBag.SquaresNorthSouth = squaresNorthSouth;
-            ViewBag.NorthSouth = northSouth;
-            ViewBag.SquaresEastWest = squaresEeastWest;
-            ViewBag.EastWest = eastWest;
-            ViewBag.Areas = areas;
-            ViewBag.BurialNumbers = burialNumbers;
+            var model = new FilterViewModel
+            {
+                HairColor = hairColor,
+                Sex = sex,
+                Depth = depth,
+                HeadDirection = headDirection,
+                AgeAtDeath = ageAtDeath,
+                SquareNorthSouth = squareNorthSouth,
+                NorthSouth = northSouth,
+                SquareEastWest = squareEeastWest,
+                EastWest = eastWest,
+                Area = area,
+                BurialNumber = burialNumber
+            };
+            
 
 
-            return View();
+            return View(model);
 
         }
     }
