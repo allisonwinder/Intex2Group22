@@ -261,7 +261,7 @@ namespace Intex2Group22.Migrations.intexmummies
                     b.HasIndex(new[] { "NormalizedName" }, "RoleNameIndex")
                         .IsUnique();
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Intex2Group22.Models.AspNetRoleClaim", b =>
@@ -286,7 +286,7 @@ namespace Intex2Group22.Migrations.intexmummies
 
                     b.HasIndex(new[] { "RoleId" }, "IX_AspNetRoleClaims_RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Intex2Group22.Models.AspNetUser", b =>
@@ -347,7 +347,7 @@ namespace Intex2Group22.Migrations.intexmummies
                     b.HasIndex(new[] { "NormalizedUserName" }, "UserNameIndex")
                         .IsUnique();
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Intex2Group22.Models.AspNetUserClaim", b =>
@@ -372,7 +372,7 @@ namespace Intex2Group22.Migrations.intexmummies
 
                     b.HasIndex(new[] { "UserId" }, "IX_AspNetUserClaims_UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Intex2Group22.Models.AspNetUserLogin", b =>
@@ -396,7 +396,7 @@ namespace Intex2Group22.Migrations.intexmummies
 
                     b.HasIndex(new[] { "UserId" }, "IX_AspNetUserLogins_UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Intex2Group22.Models.AspNetUserToken", b =>
@@ -417,7 +417,7 @@ namespace Intex2Group22.Migrations.intexmummies
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Intex2Group22.Models.Biological", b =>
