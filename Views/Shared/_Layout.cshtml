@@ -43,24 +43,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-controller="Home" asp-action="UnsupervisedModel">Unsupervised Model</a>
                         </li>
+<<<<<<< HEAD
                         <li>
                             <a class="nav-link text-light" asp-controller="Home" asp-action="Check">Check</a>
+=======
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="User" asp-action="Index">Users</a>
+>>>>>>> 9ccb63e7dc5f84245db65e54ab71301b9107aaed
                         </li>
+                        <li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Role Access Demo
+                                    Role Access
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="" asp-controller="RoleViews" asp-action="Index">Roles</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
                                     </li>
+
                                     <li>
-                                        <a class="dropdown-item" asp-area="" asp-controller="RoleViews" asp-action="Manager">Manager</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" asp-area="" asp-controller="RoleViews" asp-action="Admin">Admin</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Admin">Admin</a>
                                     </li>
                                 </ul>
                             </li>
