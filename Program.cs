@@ -122,10 +122,6 @@ app.Run();
 
 void AddAuthorizationPolicies(IServiceCollection services)
 {
-    services.AddAuthorization(options =>
-    {
-        options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
-    });
 
     builder.Services.AddAuthorization(options =>
     {

@@ -2,6 +2,7 @@
     ViewData["Title"] = "Details";
 }
 @model DetailsViewModel
+@using Intex2Group22.Core;
 
 
     <h1>Mummy Identification Number: @Model.burial.Id</h1>
@@ -54,7 +55,13 @@
         <div class="bg-faded p-1">
            <p class="pedit">Textile Description: @t.Description</p>
             <p>Locality: @t.Locale</p>
-            <p>Directions: @t.Direction<a class="btn btn-primary" asp-controller="Home" asp-action="EditTextile" asp-route-textileid="@t.Id" style="float:right">Edit Textile</a></p>
+            <p>Directions: @t.Direction
+                @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                {
+                    <a class="btn btn-primary" asp-controller="Home" asp-action="EditTextile" asp-route-textileid="@t.Id" style="float:right">Edit Textile</a>
+                }
+            </p>
+                
             @foreach (ColorTextile ct in Model.coltexts)
             {
                 @if (t.Id == ct.MainTextileid)
@@ -63,9 +70,14 @@
                     {
                         @if (c.Id == ct.MainColorid)
                         {
-                            <p class="pedit">Textile Color: @c.Value<a class="btn btn-primary" asp-controller="Home" asp-action="EditColor" asp-route-colorid="@c.Id" style="float:right">Edit Color</a></p>
-                           
-                        }   
+                            <p class="pedit">Textile Color: @c.Value
+                                @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                                {
+                                        <a class="btn btn-primary" asp-controller="Home" asp-action="EditColor" asp-route-colorid="@c.Id" style="float:right">Edit Color</a>
+                                 }
+                                </p>
+
+            }   
                     }
                 }
             }
@@ -78,7 +90,13 @@
                     {
                         @if (tf.Id == tft.MainTextilefunctionid)
                         {
-                            <p class="pedit">Function: @tf.Value<a class="btn btn-primary" asp-controller="Home" asp-action="EditFunction" asp-route-functionid="@tf.Id" style="float:right">Edit Function</a></p>
+                            
+                            <p class="pedit">Function: @tf.Value
+                                @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                                {
+                                    <a class="btn btn-primary" asp-controller="Home" asp-action="EditFunction" asp-route-functionid="@tf.Id" style="float:right">Edit Function</a>
+                                }
+                            </p>
                             
                     }
                         }
@@ -92,7 +110,12 @@
                 {
                     @if (st.MainStructureid == s.Id)
                     {
-                            <p class="pedit">Structure: @s.Value <a class="btn btn-primary" asp-controller="Home" asp-action="EditStructure" asp-route-structureid="@s.Id" style="float:right">Edit Structure</a></p>
+                            <p class="pedit">Structure: @s.Value
+                                @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                                {
+                                    <a class="btn btn-primary" asp-controller="Home" asp-action="EditStructure" asp-route-structureid="@s.Id" style="float:right">Edit Structure</a>
+                                }
+                            </p>
                        
                     }
                 }
@@ -138,8 +161,10 @@
             <p >Notes: @bac.Notes</p>
 
 
-
-            <a class="btn btn-primary"  asp-controller="Home" asp-action="EditBodyChart" asp-route-chartid="@bac.Burialid">Edit Chart</a>
+            @if (User.IsInRole(RoleConstants.Roles.Administrator))
+            {
+                <a class="btn btn-primary"  asp-controller="Home" asp-action="EditBodyChart" asp-route-chartid="@bac.Burialid">Edit Chart</a>
+            }
         </div>
     </div>
 }
