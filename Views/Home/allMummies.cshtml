@@ -99,8 +99,8 @@
         </ul>
         @if (User.IsInRole(RoleConstants.Roles.Administrator))
         {
-            <a asp-controller="Home" asp-action="Edit" asp-route-formid="@b.Id">Edit</a>
-            <a asp-controller="Home" asp-action="Delete" asp-route-formid="@b.Id">Delete</a>
+                        <a asp-controller="Home" asp-action="Edit" asp-route-formid="@b.Id" class="btn btn-outline-primary btn-lg  " style="float:right">Edit</a>
+                        <a asp-controller="Home" asp-action="Delete" asp-route-formid="@b.Id" class="btn btn-outline-primary btn-lg  " style="float:right">Delete</a>
         }
 
                     <br />

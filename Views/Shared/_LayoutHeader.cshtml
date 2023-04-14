@@ -33,9 +33,6 @@
                             <a class="nav-link text-light" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-light" asp-controller="Home" asp-action="allMummies">View Mummies</a>
                         </li>
                         <li class="nav-item">
@@ -44,9 +41,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-controller="Home" asp-action="UnsupervisedModel">Unsupervised Model</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="User" asp-action="Index">Users</a>
-                        </li>
+                        @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="User" asp-action="Index">Users</a>
+                            </li>
+                        }
                         <li>
                             @if (SignInManager.IsSignedIn(User))
                             {
@@ -89,7 +89,7 @@
     <partial name="_CookieConsentPartial" />
     <footer class="fixed-bottom border-top bg-light">
         <div class="container">
-            &copy; 2023 - Intex2Group22 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Intex2Group22 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a> @*Here is our GDPR Compliant Privacy Policy*@
         </div>
     </footer>
 </body>
