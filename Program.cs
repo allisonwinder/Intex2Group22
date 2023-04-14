@@ -65,13 +65,11 @@ AddAuthorizationPolicies(builder.Services);
 AddScoped();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
-{  
-    options.CheckConsentNeeded = context =>
-    {
-        bool hasConsent = context.Request.Cookies["CookieConsent"] == "true"; // Check the value of the server-side flag
-        return !hasConsent; // Show the consent popup if the user has not given consent
-    };
+{
+    options.CheckConsentNeeded = context => true;
     options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.ConsentCookie.SecurePolicy = CookieSecurePolicy.Always;
+    
 });
 
 builder.Services.AddSingleton<InferenceSession>(
