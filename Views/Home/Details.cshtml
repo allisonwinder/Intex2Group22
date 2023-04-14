@@ -9,7 +9,7 @@
     <br />
     <p>Age Group: @Model.burial.Adultsubadult</p>
     <br />
-
+    <a asp-controller="Home" asp-action="AddTextile" asp-route-mummyid="@Model.burial.Id">Add Textile</a>
     @foreach (Textile t in Model.textiles)
     {
         <a asp-controller="Home" asp-action="EditTextile" asp-route-textileid = "@t.Id">Edit Textile</a>

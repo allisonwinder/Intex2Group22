@@ -7,10 +7,35 @@
 @model FilterViewModel
 
 <div>
-    <form asp-controller="Home" asp-action="allMummies" method="post">
+    <form asp-controller="Home" asp-action="allMummies" asp-route-pageNum="1" method="post">
 
-        <label asp-for="Sex">SEX:</label>
+        <label asp-for="Sex">Sex:</label>
         @Html.DropDownListFor(m => m.Sex, new SelectList(Model.Sex), "Select Sex", new {@class = "form-control"})
-        
+        <br />
+
+        <label asp-for="HairColor">Hair Color:</label>
+        @Html.DropDownListFor(m => m.HairColor, new SelectList(Model.HairColor), "Select Hair Color", new {@class = "form-control"})
+        <br />
+
+        <label asp-for="HeadDirection">Head Direction:</label>
+        @Html.DropDownListFor(m => m.HeadDirection, new SelectList(Model.HeadDirection), "Select Head Direction", new {@class = "form-control"})
+        <br />
+
+        <label asp-for="AgeAtDeath">Age At Death:</label>
+        @Html.DropDownListFor(m => m.AgeAtDeath, new SelectList(Model.AgeAtDeath), "Select Age At Death", new {@class = "form-control"})
+        <br />
+
+        <label asp-for="Area">Area:</label>
+        @Html.DropDownListFor(m => m.Area, new SelectList(Model.Area), "Select Area", new {@class = "form-control"})
+        <br />
+
+        <label asp-for="BurialId">Burial Id:</label>
+        @Html.DropDownListFor(m => m.BurialId, new SelectList(Model.BurialId), "Burial Id", new {@class = "form-control"})
+        <br />
+
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <br />
+
+        <a asp-controller="Home" asp-action="allMummies" asp-route-fieldType="" asp-route-pageNum="1" >Reset</a>
     </form>
 </div>
