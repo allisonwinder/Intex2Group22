@@ -11,6 +11,7 @@ using Intex2Group22.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -72,9 +73,14 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1;
 });
 
-//builder.Services.Configure<RoleConstants>(options =>
-//    options
-//);
+# region Sekreto
+var config = new ConfigurationBuilder()
+    .AddUserSecrets<Program>()
+    .Build();
+Console.WriteLine($"Hello, {config["Name"]}");
+
+# endregion
+
 
 var app = builder.Build();
 
@@ -87,7 +93,7 @@ else
 {
 
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // enable hsts
     app.UseHsts();
 }
 app.UseMiddleware<CspMiddleware>(); // add middleware for CSP header
