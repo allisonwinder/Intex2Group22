@@ -51,7 +51,7 @@ builder.Services.AddHsts(options =>
 
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddIdentityServer();
+
 
 builder.Services.AddAuthentication();
 
@@ -115,20 +115,20 @@ builder.Configuration.AddUserSecrets<Project>();
 
 var app = builder.Build();
 
-var secrets = app.Configuration.GetSection("ConnectionStrings").GetChildren();
-var appSettings = app.Configuration.GetSection("AppSettings");
+//var secrets = app.Configuration.GetSection("ConnectionStrings").GetChildren();
+//var appSettings = app.Configuration.GetSection("AppSettings");
 
-foreach (var secret in secrets)
-{
-    appSettings[secret.Key] = secret.Value;
-}
+//foreach (var secret in secrets)
+//{
+//    appSettings[secret.Key] = secret.Value;
+//}
 
-app.MapGet("/", () =>
-{
-    var mySettings = app.Services.GetRequiredService<IOptions<MySettings>>().Value;
-    
-    return Results.Text($"Connection string: {mySettings.ConnectionStrings.DefaultConnection}");
-});
+//app.MapGet("/", () =>
+//{
+//    var mySettings = app.Services.GetRequiredService<IOptions<MySettings>>().Value;
+
+//    return Results.Text($"Connection string: {mySettings.ConnectionStrings.DefaultConnection}");
+//});
 
 
 
