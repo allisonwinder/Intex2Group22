@@ -1,0 +1,13 @@
+﻿@{
+}
+@model Structure
+
+<form method="post" asp-action="EditStructure">
+
+    <input type="hidden" asp-for="Id">
+    <label asp-for="Value">Description: </label>
+    <input asp-for="Value">
+    <br />
+    <button type="submit">Update</button>
+
+</form>

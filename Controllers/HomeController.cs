@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 using Microsoft.EntityFrameworkCore;
 using Intex2Group22.Core;
+using Microsoft.Data.SqlClient.Server;
 
 namespace Intex2Group22.Controllers
 {
@@ -57,8 +58,6 @@ namespace Intex2Group22.Controllers
         //[Authorize(Roles = "Admin")]
         public IActionResult AddForm()
         {
-            //ViewBag.Categories = repo.Categories.ToList()
-            ;
             return View();
                 }
 
@@ -84,7 +83,6 @@ namespace Intex2Group22.Controllers
         [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Edit(long formid)
         {
-            //ViewBag.Majors but change = repo.ToList();
             var form = repo.Burialmains.Single(x => x.Id == formid);
             return View("EditForm", form);
         }
@@ -125,47 +123,43 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpPost]
-        public IActionResult allMummies(string HairColor, string Sex, string Depth, string HeadDirection, string AgeAtDeath, string SquareNorthSouth, string NorthSouth, string SquareEastWest, string EastWest, string Area, string BurialNumber, int pageNum = 1)
+        public IActionResult allMummies(string HairColor, string BurialId, string Sex, string Depth, string HeadDirection, string AgeAtDeath, string SquareNorthSouth, string NorthSouth, string SquareEastWest, string EastWest, string Area, string BurialNumber, int pageNum = 1)
         {
-            int pageSize = 10;
-
+            int pageSize = 50;
             var x = new MummiesViewModel
             {
                 Burialmains = repo.Burialmains
+                    .Where(b => (Sex == null || b.Sex == Sex) && (HairColor == null || b.Haircolor == HairColor) &&
+                                (Depth == null || b.Depth == Depth) &&
+                                (HeadDirection == null || b.Headdirection == HeadDirection) &&
+                                (AgeAtDeath == null || b.Ageatdeath == AgeAtDeath) &&
+                                (SquareNorthSouth == null || b.Squarenorthsouth == SquareNorthSouth) &&
+                                (NorthSouth == null || b.Northsouth == NorthSouth) &&
+                                (SquareEastWest == null || b.Squareeastwest == SquareEastWest) &&
+                                (EastWest == null || b.Eastwest == EastWest) &&
+                                (Area == null || b.Area == Area) &&
+                                (BurialNumber == null || b.Burialnumber == BurialNumber) &&
+                                (BurialId == null || b.Burialid == BurialId))
                     .OrderBy(b => b.Id)
-                    .Where(b => (Sex == null || b.Sex == Sex) && (HairColor == null || b.Haircolor == HairColor) && 
-                        (Depth == null || b.Depth == Depth) &&
-                        (HeadDirection == null || b.Headdirection == HeadDirection) &&
-                        (AgeAtDeath == null || b.Ageatdeath == AgeAtDeath) &&
-                        (SquareNorthSouth == null || b.Squarenorthsouth == SquareNorthSouth) &&
-                        (NorthSouth == null || b.Northsouth == NorthSouth) &&
-                        (SquareEastWest == null || b.Squareeastwest == SquareEastWest) &&
-                        (EastWest == null || b.Eastwest == EastWest) &&
-                        (Area == null || b.Area == Area) &&
-                        (BurialNumber == null || b.Burialnumber == BurialNumber))
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize),
-                    
                 PageInfo = new PageInfo
                 {
-                    TotalNumMummies = (Sex == null && HairColor == null && Depth == null && HeadDirection == null &&
-                    AgeAtDeath == null && SquareNorthSouth == null && NorthSouth == null && SquareEastWest == null &&
-                    EastWest == null && Area == null && BurialNumber == null ? repo.Burialmains.Count()
-                    :repo.Burialmains.Where(b => (Sex == null || b.Sex == Sex) && (HairColor == null || b.Haircolor == HairColor) &&
-                        (Depth == null || b.Depth == Depth) &&
-                        (HeadDirection == null || b.Headdirection == HeadDirection) &&
-                        (AgeAtDeath == null || b.Ageatdeath == AgeAtDeath) &&
-                        (SquareNorthSouth == null || b.Squarenorthsouth == SquareNorthSouth) &&
-                        (NorthSouth == null || b.Northsouth == NorthSouth) &&
-                        (SquareEastWest == null || b.Squareeastwest == SquareEastWest) &&
-                        (EastWest == null || b.Eastwest == EastWest) &&
-                        (Area == null || b.Area == Area) &&
-                        (BurialNumber == null || b.Burialnumber == BurialNumber)).Count()),
+                    TotalNumMummies = repo.Burialmains.Count(b => (Sex == null || b.Sex == Sex) && (HairColor == null || b.Haircolor == HairColor) &&
+                                                              (Depth == null || b.Depth == Depth) &&
+                                                              (HeadDirection == null || b.Headdirection == HeadDirection) &&
+                                                              (AgeAtDeath == null || b.Ageatdeath == AgeAtDeath) &&
+                                                              (SquareNorthSouth == null || b.Squarenorthsouth == SquareNorthSouth) &&
+                                                              (NorthSouth == null || b.Northsouth == NorthSouth) &&
+                                                              (SquareEastWest == null || b.Squareeastwest == SquareEastWest) &&
+                                                              (EastWest == null || b.Eastwest == EastWest) &&
+                                                              (Area == null || b.Area == Area) &&
+                                                              (BurialNumber == null || b.Burialnumber == BurialNumber) &&
+                                                              (BurialId == null || b.Burialid == BurialId)),
                     MummiesPerPage = pageSize,
-                    CurrentPage = pageNum
+                    CurrentPage = pageNum,
                 }
             };
-            
             return View(x);
         }
 
@@ -197,7 +191,7 @@ namespace Intex2Group22.Controllers
         
         public IActionResult Check(int pageNum=1)
         {
-            int pageSize = 50;
+           // int pageSize = 50;
 
             var joinData = from bm in repo.Burialmains
                            join bmt in repo.BurialmainTextiles on bm.Id equals bmt.MainBurialmainid into bmtGroup
@@ -303,6 +297,160 @@ namespace Intex2Group22.Controllers
             return View(data);
         }
 
+        [HttpGet]
+        public IActionResult EditColor(long colorid)
+        {
+            ViewBag.Colors = repo.Colors;
+            var form = repo.Colors.Single(x => x.Id == colorid);
+            return View("EditColor", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditColor(Color c)
+        {
+
+            repo.Colors.Update(c);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+        }
+
+        [HttpGet]
+        public IActionResult EditTextile (long textileid)
+        {
+            var form = repo.Textiles.Single(x => x.Id == textileid);
+            return View("EditTextile", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditTextile(Textile t)
+        {
+
+            repo.Textiles.Update(t);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+
+        }
+
+        [HttpGet]
+        public IActionResult EditStructure(long structureid)
+        {
+            var form = repo.Structures.Single(x => x.Id == structureid);
+            return View("EditStructure", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditStructure(Structure s)
+        {
+
+            repo.Structures.Update(s);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+
+        }
+
+        [HttpGet]
+        public IActionResult EditFunction(long functionid)
+        {
+            var form = repo.Textilefunctions.Single(x => x.Id == functionid);
+            return View("EditFunction", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditFunction(Textilefunction tf)
+        {
+
+            repo.Textilefunctions.Update(tf);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+
+        }
+
+        [HttpGet]
+        public IActionResult EditBodyChart(string chartid)
+        {
+            var form = repo.Bodyanalysischarts.Single(x => x.Burialid == chartid);
+            return View("EditBodyChart", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditBodyChart(Bodyanalysischart bac)
+        {
+
+            repo.Bodyanalysischarts.Update(bac);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+
+        }
+
+        [HttpGet]
+        public IActionResult AddTextile(long mummyid)
+        {
+            var burial = repo.Burialmains.Single(x => x.Id == mummyid);
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            var model = new AddTextileViewModel
+            {
+                Id = mummyid,
+                Textile = new Textile()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddTextile(AddTextileViewModel model)
+        {
+            var burial = repo.Burialmains.Find(model.Id);
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var textile = model.Textile;
+                repo.Textiles.Add(textile);
+
+                var burialTextile = new BurialmainTextile
+                {
+                    MainBurialmainid = model.Id,
+                    MainTextileid = textile.Id
+                };
+                repo.BurialmainTextiles.Add(burialTextile);
+
+                repo.SaveChanges();
+
+                return RedirectToAction("Details", model.Id);
+            }
+
+            return View(model);
+        }
+
+
+
+
+
+
     }
 
 }
+
+// 19140298416325769

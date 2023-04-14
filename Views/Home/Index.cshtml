@@ -1,11 +1,111 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "_LayoutHeader";
 }
 
-<div class="text-center bg-light" >
-    <h1 class="display-4">Fag el-Gamous</h1>
-    
+<header class="topheader">
+    <h1 class="display-4 landingheader">Fag el-Gamous</h1>
+</header>
+
+<br/>
+<br/>
+<div class="container">
+    <div>
+        <h3>What is Fag el-Gamous?</h3>
+        <br/>
+        <p class="info">
+            Fag el-Gamous (Way of the Water Buffalo) is a large and important cemetery in Egypt that has been under archeological investigation (primarily by BYU researchers) for over 25 years.
+            During multiple years of study, researchers have excavated more than 1,000 mummies and collected data in field notes, spreadsheets, and simple databases about each mummy’s location, physical orientation in the ground, burial depth, hair color, 
+            wrapping (including information about the textiles used), sex, age, bone dimensions, items accompanying the mummy, and more. And, of course, there are many, many photographs. Offsite, researchers have performed a variety of analyses on the excavated items including carbon 
+            dating, DNA sequencing, and others.
+        </p>
+    </div>
+    <br/>
+    <br/>
+
+    <div class="container-fluid">
+        <h2 class="text-center border border-2 border-dark p-2 m-0">Photo Gallery</h2>
+        <br />
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <img src="~/pictures/2002-0028.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/2002-0049.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/2002-0058.jpg" class="img-fluid" />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <img src="~/pictures/2002-0069.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/2002-0073.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/2002-0075.jpg" class="img-fluid" />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <img src="~/pictures/2002-0081.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/2002-0084.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_0883.jpg" class="img-fluid" />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <img src="~/pictures/img_0925.jpg" class="img-fluid"/>
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_0961.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_1218.jpg" class="img-fluid" />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <img src="~/pictures/img_1010.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_1185.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_0991.jpg" class="img-fluid" />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <img src="~/pictures/img_1243.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_1191.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_1199.jpg" class="img-fluid" />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <img src="~/pictures/img_1178.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_1256.jpg" class="img-fluid" />
+            </div>
+            <div class="col-4">
+                <img src="~/pictures/img_1272.jpg" class="img-fluid" />
+            </div>
+        </div>
+        <br />
+        <a class="btn btn-primary btn-lg" asp-controller="Home" asp-action="allMummies">View Mummies</a>
+    </div>
 </div>
 
-Vistis: @ViewBag.visits
-<br />
+@*Visits: @ViewBag.visits*@

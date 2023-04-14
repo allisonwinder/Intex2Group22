@@ -9,9 +9,10 @@
     <br />
     <p>Age Group: @Model.burial.Adultsubadult</p>
     <br />
-
+    <a asp-controller="Home" asp-action="AddTextile" asp-route-mummyid="@Model.burial.Id">Add Textile</a>
     @foreach (Textile t in Model.textiles)
     {
+        <a asp-controller="Home" asp-action="EditTextile" asp-route-textileid = "@t.Id">Edit Textile</a>
        <p>Textile Description: @t.Description</p>
         <p>Locality: @t.Locale</p>
         <p>Directions: @t.Direction</p>
@@ -24,6 +25,7 @@
                     @if (c.Id == ct.MainColorid)
                     {
                        <p>Textile Color: @c.Value</p>
+                    <a asp-controller="Home" asp-action="EditColor" asp-route-colorid="@c.Id">Edit Color</a>
                     }   
                 }
             }
@@ -38,10 +40,11 @@
                     @if (tf.Id == tft.MainTextilefunctionid)
                     {
                         <p>Function: @tf.Value</p>
+                    <a asp-controller="Home" asp-action="EditFunction" asp-route-functionid="@tf.Id">Edit Function</a>
+                }
                     }
                 }
             }
-        }
     @foreach (StructureTextile st in Model.structexts)
     {
         @if (t.Id == st.MainTextileid)
@@ -51,6 +54,7 @@
                 @if (st.MainStructureid == s.Id)
                 {
                     <p>Structure: @s.Value</p>
+                    <a asp-controller="Home" asp-action="EditStructure" asp-route-structureid="@s.Id">Edit Structure</a>
                 }
             }
         }
@@ -63,6 +67,7 @@
 {
     <p>BurialId: @bac.Burialid</p>
     <p>Area: @bac.Area</p>
+    <a asp-controller="Home" asp-action="EditBodyChart" asp-route-chartid="@bac.Burialid">Edit Chart</a>
 }
 <br />
 

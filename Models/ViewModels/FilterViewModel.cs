@@ -13,5 +13,8 @@
         public IEnumerable<string> EastWest { get; set; }
         public IEnumerable<string> Area { get; set; }
         public IEnumerable<string> BurialNumber { get; set; }
+
+        public IEnumerable<string> BurialId { get; set; }
+
     }
 }
