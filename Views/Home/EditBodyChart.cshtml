@@ -1,89 +1,102 @@
 ﻿@{
 }
 @model Bodyanalysischart
+<h1>Edit Body Analysis Chart</h1>
+
+<div class="container card card-outline-primary bg-light text-left m-1 p-1 mx-auto" style="width: 60rem;">
 
 <form method="post" asp-action="EditBodyChart">
+        <div class="row" style="text-align:right">
+            <div class="col-lg-6">
 
     <input type="hidden" asp-for="Burialid">
     <label asp-for="Observations">Observations: </label>
     <input asp-for="Observations" />
-    <br />
+    <br /><br />
    
     <label asp-for="Robust">Robust: </label>
     <input asp-for="Robust" />
-    <br />
+    <br /><br />
     <label asp-for="Supraorbitalridges">Supraorbital Ridges: </label>
     <input asp-for="Supraorbitalridges" />
-    <br />
+    <br /><br />
     <label asp-for="Orbitedge">Orbit Edge: </label>
     <input asp-for="Orbitedge" />
-    <br />
+    <br /><br />
     <label asp-for="Parietalblossing">Parietal Blossing: </label>
     <input asp-for="Parietalblossing" />
-    <br />
+    <br /><br />
     <label asp-for="Gonion">Gonion: </label>
     <input asp-for="Gonion" />
-    <br />
+    <br /><br />
     <label asp-for="Nuchalcrest">Nuchalcrest: </label>
     <input asp-for="Nuchalcrest" />
-    <br />
+    <br /><br />
     <label asp-for="Sphenooccipitalsynchondrosis">Sphenooccipital synchondrosis: </label>
     <input asp-for="Sphenooccipitalsynchondrosis" />
-    <br />
+    <br /><br />
     <label asp-for="Lambdoidsuture">Lambdoid suture: </label>
     <input asp-for="Lambdoidsuture" />
-    <br />
+    <br /><br />
     <label asp-for="Squamossuture">Squamos suture: </label>
     <input asp-for="Squamossuture" />
-    <br />
+    <br /><br />
     <label asp-for="Toothattrition">Tooth attrition: </label>
     <input asp-for="Toothattrition" />
-    <br />
+    <br /><br />
     <label asp-for="Tootheruptionageestimation">Tooth eruptionage estimation: </label>
     <input asp-for="Tootheruptionageestimation" />
-    <br />
+    <br /><br />
+            
     <label asp-for="Ventralarc">Ventralarc: </label>
     <input asp-for="Ventralarc" />
-    <br />
+    <br /><br />
+            </div>
+            <div class="col-lg-6">
+
+                <br />
     <label asp-for="Subpubicangle">Subpubic angle: </label>
     <input asp-for="Subpubicangle" />
-    <br />
+    <br /><br />
     <label asp-for="Sciaticnotch">Sciatic notch: </label>
     <input asp-for="Sciaticnotch" />
-    <br />
+    <br /><br />
     <label asp-for="MedicalIpRamus">Medical Ip Ramus: </label>
     <input asp-for="MedicalIpRamus" />
-    <br />
+        <br /><br />
     <label asp-for="Femur">Femur: </label>
     <input asp-for="Femur" />
-    <br />
+    <br /><br />
     <label asp-for="Femurheaddiameter">Femur head diameter: </label>
     <input asp-for="Femurheaddiameter" />
-    <br />
+    <br /><br />
     <label asp-for="Femurlength">Femur length: </label>
     <input asp-for="Femurlength" />
-    <br />
+    <br /><br />
     <label asp-for="Humerus">Humerus: </label>
     <input asp-for="Humerus" />
-    <br />
+    <br /><br />
     <label asp-for="Humerusheaddiameter">Humerus head diameter: </label>
     <input asp-for="Humerusheaddiameter" />
-    <br />
+    <br /><br />
     <label asp-for="Humeruslength">Humerus length: </label>
     <input asp-for="Humeruslength" />
-    <br />
+    <br /><br />
     <label asp-for="Estimatestature">Estimate stature: </label>
     <input asp-for="Estimatestature" />
-    <br />
+    <br /><br />
     <label asp-for="Osteophytosis">Osteophytosis: </label>
     <input asp-for="Osteophytosis" />
-    <br />
+    <br /><br />
     <label asp-for="CariesPeriodontalDisease">Caries Periodontal Disease: </label>
     <input asp-for="CariesPeriodontalDisease" />
-    <br />
+    <br /><br />
     <label asp-for="Notes">Notes: </label>
     <input asp-for="Notes" />
-    <br />
-    <button type="submit">Update</button>
+    <br /><br />
+            </div>
+        </div>
+    <button class="btn btn-primary" style="text-align:center" type="submit">Update</button>
 
 </form>
+</div>
