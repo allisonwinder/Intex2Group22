@@ -8,74 +8,8 @@
 
 <div class="row m-1 p-1">
     <div id="categories" class="col-3">
-        <vc:filter></vc:filter>
-        @*<div class="filter-form">*@
-            @*<form method="post" asp-action="allMummies">
-                <div class="form-group">
-                    <label for="sex">Sex:</label>
-                    <select class="form-control" id="sex" name="Sex">
-                        <option value="">All</option>
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                    </select>
-                </div>
-                <br />
+        
 
-                 <div class="form-group">
-                    <label for="hairColor">Hair Color:</label>
-                    <select class="form-control" id="hairColor" name="HairColor">
-                        <option value="">All</option>
-                        <option value="B">Brown</option>
-                        <option value="K">Black</option>
-                        <option value="A">Brown-Red</option>
-                        <option value="R">Red</option>
-                        <option value="D">Blonde</option>
-                        <option value="U">Unknown</option>
-                    </select>
-                </div>
-                <br />
-
-                <div class="form-group">
-                    <label for="headdirection">Head Direction:</label>
-                    <select class="form-control" id="headDirection" name="HeadDirection">
-                        <option value="">All</option>
-                        <option value="E">East</option>
-                        <option value="W">West</option>
-                    </select>
-                </div>
-                <br />
-
-                <div class="form-group">
-                    <label for="ageAtDeath">Age At Death:</label>
-                    <select class="form-control" id="ageAtDeath" name="AgeAtDeath">
-                        <option value="">All</option>
-                        <option value="A">Adult - 15+ Years</option>
-                        <option value="C">Child 3 - 15 Years</option>
-                        <option value="I">Infant 1 - 3 Years</option>
-                        <option value="N">Newborn 0 - 1 Years</option>
-                        <option value="U">Unknown</option>
-                    </select>
-                </div>
-                <br />
-
-                <div class="form-group">
-                    <label for="area">Area:</label>
-                    <select class="form-control" id="area" name="Area">
-                        <option value="">All</option>
-                        <option value="SE">Southeast</option>
-                        <option value="SW">Southwest</option>
-                        <option value="NW">Northwest</option>
-                        <option value="NE">Northeast</option>
-                        <option value="NNW">North Northwest</option>
-                    </select>
-                </div>
-                <br />
-
-    
-                <button type="submit" class="btn btn-primary">Filter</button>
-                <button type="reset" class="btn btn-secondary">Reset Filters</button>
-            </form>*@
-        @*</div>*@
         
     </div>
     <div class="col-9">
@@ -120,5 +54,8 @@
 
 </div>
 </div>
-<a asp-controller="Home" asp-action="AddForm">Add</a>
+@if (User.IsInRole(RoleConstants.Roles.Administrator))
+{
+    <a asp-controller="Home" asp-action="AddForm">Add</a>
+}
 
