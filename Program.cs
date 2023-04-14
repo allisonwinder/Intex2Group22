@@ -8,9 +8,14 @@ using Microsoft.VisualBasic;
 using Intex2Group22.Core;
 using Intex2Group22.Core.Repositories;
 using Intex2Group22.Repositories;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpsPolicy;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -29,6 +34,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddHsts(options =>
+{
+    options.Preload = true;
+    options.IncludeSubDomains = true;
+    options.MaxAge = TimeSpan.FromDays(60);
+
+});
 
 builder.Services.AddControllersWithViews();
 
@@ -58,6 +70,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 9;
     options.Password.RequiredUniqueChars = 1;
 });
+
+
 
 var app = builder.Build();
 

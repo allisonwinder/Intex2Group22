@@ -23,19 +23,22 @@ namespace Intex2Group22.Controllers
         {
             repo = temp;
         }
-
+        int visits = 0;
         public IActionResult Index()
         {
             //// update the visits counter
             //var visitString = Request.Cookies["visits"];
-            //int visit = 0;
+            
             //int.TryParse(visitString, out visits);
             //visits++;
 
             //Response.Cookies.Append("visits", visits.ToString());
 
-            //ViewBag.visits = visitString;
+            //ViewBag.visits = visits;
 
+            ////CookieOptions options = new CookieOptions();
+            ////options.Expires = DateTime.Now.AddDays(365);
+            ////Respo
             return View();
         }
 
@@ -61,6 +64,8 @@ namespace Intex2Group22.Controllers
                 }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
+
         public IActionResult AddForm(Burialmain bm)
         {
             if (ModelState.IsValid)
@@ -77,6 +82,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Edit(long formid)
         {
             var form = repo.Burialmains.Single(x => x.Id == formid);
@@ -84,6 +90,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")] //limit certain actions to the Administrators
         public IActionResult Edit(Burialmain bm)
         {
             repo.Burialmains.Update(bm);
@@ -96,17 +103,17 @@ namespace Intex2Group22.Controllers
             return View();
         }
 
-        public IActionResult allMummies(string haircolor, string sex, string depth, int pageNum = 1)
+        [HttpGet]
+        public IActionResult allMummies(int pageNum = 1)
         {
             int pageSize = 50;
             var x = new MummiesViewModel
             {
                 Burialmains = repo.Burialmains
-                    .Where(b => (b.Haircolor == haircolor || string.IsNullOrEmpty(haircolor)) && (b.Sex == sex || string.IsNullOrEmpty(sex)) && (b.Depth == depth || string.IsNullOrEmpty(depth)))
                     .OrderBy(b => b.Id)
                     .Skip((pageNum - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToList(),
+                    .Take(pageSize),
+                    
                 PageInfo = new PageInfo
                 {
                     TotalNumMummies = repo.Burialmains.Count(),
@@ -114,8 +121,51 @@ namespace Intex2Group22.Controllers
                     CurrentPage = pageNum
                 }
             };
-            ViewBag.SelectedHairColor = haircolor;
-            ViewBag.SelectedSex = sex;
+            return View(x);
+        }
+
+        [HttpPost]
+        public IActionResult allMummies(string HairColor, string Sex, string Depth, string HeadDirection, string AgeAtDeath, string SquareNorthSouth, string NorthSouth, string SquareEastWest, string EastWest, string Area, string BurialNumber, int pageNum = 1)
+        {
+            int pageSize = 10;
+
+            var x = new MummiesViewModel
+            {
+                Burialmains = repo.Burialmains
+                    .OrderBy(b => b.Id)
+                    .Where(b => (Sex == null || b.Sex == Sex) && (HairColor == null || b.Haircolor == HairColor) && 
+                        (Depth == null || b.Depth == Depth) &&
+                        (HeadDirection == null || b.Headdirection == HeadDirection) &&
+                        (AgeAtDeath == null || b.Ageatdeath == AgeAtDeath) &&
+                        (SquareNorthSouth == null || b.Squarenorthsouth == SquareNorthSouth) &&
+                        (NorthSouth == null || b.Northsouth == NorthSouth) &&
+                        (SquareEastWest == null || b.Squareeastwest == SquareEastWest) &&
+                        (EastWest == null || b.Eastwest == EastWest) &&
+                        (Area == null || b.Area == Area) &&
+                        (BurialNumber == null || b.Burialnumber == BurialNumber))
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize),
+                    
+                PageInfo = new PageInfo
+                {
+                    TotalNumMummies = (Sex == null && HairColor == null && Depth == null && HeadDirection == null &&
+                    AgeAtDeath == null && SquareNorthSouth == null && NorthSouth == null && SquareEastWest == null &&
+                    EastWest == null && Area == null && BurialNumber == null ? repo.Burialmains.Count()
+                    :repo.Burialmains.Where(b => (Sex == null || b.Sex == Sex) && (HairColor == null || b.Haircolor == HairColor) &&
+                        (Depth == null || b.Depth == Depth) &&
+                        (HeadDirection == null || b.Headdirection == HeadDirection) &&
+                        (AgeAtDeath == null || b.Ageatdeath == AgeAtDeath) &&
+                        (SquareNorthSouth == null || b.Squarenorthsouth == SquareNorthSouth) &&
+                        (NorthSouth == null || b.Northsouth == NorthSouth) &&
+                        (SquareEastWest == null || b.Squareeastwest == SquareEastWest) &&
+                        (EastWest == null || b.Eastwest == EastWest) &&
+                        (Area == null || b.Area == Area) &&
+                        (BurialNumber == null || b.Burialnumber == BurialNumber)).Count()),
+                    MummiesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+            
             return View(x);
         }
 
@@ -127,6 +177,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Delete(long formid)
         {
             var forms = repo.Burialmains.Single(x => x.Id == formid);
