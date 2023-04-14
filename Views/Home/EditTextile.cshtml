@@ -1,0 +1,24 @@
+﻿@{
+}
+@model Textile
+
+<form method="post" asp-action="EditTextile">
+
+        <input type="hidden" asp-for="Id">
+        <label asp-for="Description">Description: </label>
+        <input asp-for="Description">
+        <br />
+        <label asp-for="Locale">Locale: </label>
+        <input asp-for="Locale">
+        <br />
+        <label asp-for="Direction">Direction: </label>
+        <input asp-for="Direction">
+        <br />
+        <label asp-for="Sampledate">Sample Date: </label>
+        <input asp-for="Sampledate" />
+        <br />
+        <label asp-for="Estimatedperiod">Estimated Period: </label>
+        <input asp-for="Estimatedperiod" />
+    <button type="submit">Update</button>
+
+</form>
