@@ -94,8 +94,9 @@
             <a asp-controller="Home" asp-action="Edit" asp-route-formid="@b.Id">Edit</a>
             <a asp-controller="Home" asp-action="Delete" asp-route-formid="@b.Id">Delete</a>
         }
-        <br />
-    </div>
+
+                    <br />
+            </div>
             <span class="card-text">
                 <a asp-controller="Home" asp-action="Details" asp-route-formid="@b.Id"
                     class="btn btn-outline-primary btn-lg  " style="float:right">
@@ -103,8 +104,8 @@
                 </a>
             </span>
        
-</div>
-}
+        </div>
+        }
 
 
 <div page-blah="@Model.PageInfo" page-action="allMummies" page-classes-enabled="true"
