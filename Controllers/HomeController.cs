@@ -58,8 +58,6 @@ namespace Intex2Group22.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult AddForm()
         {
-            //ViewBag.Categories = repo.Categories.ToList()
-            ;
             return View();
                 }
 
@@ -398,6 +396,56 @@ namespace Intex2Group22.Controllers
             return RedirectToAction("allMummies");
 
         }
+
+        [HttpGet]
+        public IActionResult AddTextile(long mummyid)
+        {
+            var burial = repo.Burialmains.Single(x => x.Id == mummyid);
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            var model = new AddTextileViewModel
+            {
+                Id = mummyid,
+                Textile = new Textile()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddTextile(AddTextileViewModel model)
+        {
+            var burial = repo.Burialmains.Find(model.Id);
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var textile = model.Textile;
+                repo.Textiles.Add(textile);
+
+                var burialTextile = new BurialmainTextile
+                {
+                    MainBurialmainid = model.Id,
+                    MainTextileid = textile.Id
+                };
+                repo.BurialmainTextiles.Add(burialTextile);
+
+                repo.SaveChanges();
+
+                return RedirectToAction("Details", model.Id);
+            }
+
+            return View(model);
+        }
+
+
+
 
 
 

@@ -1,0 +1,24 @@
+﻿@{
+}
+@model AddTextileViewModel
+
+<form method="post" asp-action="AddTextile">
+
+    <input type="hidden" asp-for="Id">
+    <label asp-for="Textile.Description">Description: </label>
+    <input asp-for="Textile.Description">
+    <br />
+    <label asp-for="Textile.Locale">Locale: </label>
+    <input asp-for="Textile.Locale">
+    <br />
+    <label asp-for="Textile.Direction">Direction: </label>
+    <input asp-for="Textile.Direction">
+    <br />
+    <label asp-for="Textile.Sampledate">Sample Date: </label>
+    <input asp-for="Textile.Sampledate" />
+    <br />
+    <label asp-for="Textile.Estimatedperiod">Estimated Period: </label>
+    <input asp-for="Textile.Estimatedperiod" />
+    <button type="submit">Add</button>
+
+</form>
