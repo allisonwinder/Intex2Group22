@@ -122,5 +122,8 @@
 
 </div>
 </div>
-<a asp-controller="Home" asp-action="AddForm">Add</a>
+@if (User.IsInRole(RoleConstants.Roles.Administrator))
+{
+    <a asp-controller="Home" asp-action="AddForm">Add</a>
+}
 
