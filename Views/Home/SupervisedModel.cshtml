@@ -3,7 +3,7 @@
 
 <h1>This is the supervised model page!</h1>
 
-<form method="post" onsubmit="event.preventDefault(); CallInference();">
+<form asp-controller="Onnx" asp-action="Score" method="post" onsubmit="event.preventDefault(); CallInference();">
     @Html.AntiForgeryToken()
     <div class="form-group">
         <label for="sex_M">Sex_M</label>

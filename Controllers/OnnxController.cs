@@ -8,7 +8,7 @@ using Microsoft.ML.OnnxRuntime.Tensors;
 namespace Intex2Group22.Controllers
 {
     [ApiController]
-    [Route("/predict")]
+    [Route("predict")]
 
     public class OnnxController : ControllerBase
     {
