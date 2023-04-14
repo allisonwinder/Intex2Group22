@@ -91,7 +91,7 @@ testDiv a {
 
 .sidebar {
     position: fixed;
-    top: 54px;
+    top: 56px;
     right: 0px; /* adjust this value to change the distance from the right */
     height: calc(100% - 54px);
     width: 300px;
@@ -124,3 +124,18 @@ testDiv a {
     background-position: center;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 16px;
+}
+
+.pedit {
+    font-size: 20px;
+}

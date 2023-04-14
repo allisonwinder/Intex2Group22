@@ -80,7 +80,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
+        //[Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Edit(long formid)
         {
             var form = repo.Burialmains.Single(x => x.Id == formid);
@@ -88,7 +88,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")] //limit certain actions to the Administrators
+        //[Authorize(Roles = $"{RoleConstants.Roles.Administrator}")] //limit certain actions to the Administrators
         public IActionResult Edit(Burialmain bm)
         {
             repo.Burialmains.Update(bm);
