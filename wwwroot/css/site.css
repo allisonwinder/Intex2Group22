@@ -139,3 +139,7 @@ label {
 .pedit {
     font-size: 20px;
 }
+
+.image-spacing {
+    margin-bottom: 25px; /* Adjust the value as needed */
+}
