@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Intex2Group22.Core;
 
 namespace Intex2Group22.Areas.Identity.Pages.Account
 {
@@ -135,13 +136,15 @@ namespace Intex2Group22.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // Check if the user's email ends with "@admin.me"
+                    if (Input.Email.EndsWith("@admin.me"))
+                    {
+                        // Add the user to the "Administrator" role
+                        await _userManager.AddToRoleAsync(user, RoleConstants.Roles.Administrator);
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
-                     //// case (firstname + ' ' + lastname)
-
-                     //       if Korbin Derr
-                     //       _userManager.AddToRoleAsync(user, "Admin")
-
+                       
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

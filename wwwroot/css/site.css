@@ -15,6 +15,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color:white;
 }
 
 header {
@@ -70,9 +71,7 @@ testDiv a {
     font-size: 20px;
 }
 
-body {
-    background-color: gainsboro;
-}
+
 
 .landingheader {
     font-family: Constantia;
@@ -92,21 +91,51 @@ body {
 
 .sidebar {
     position: fixed;
-    right: 0;
-    top: 58px;
-    height: calc(100% - 58px);
+    top: 56px;
+    right: 0px; /* adjust this value to change the distance from the right */
+    height: calc(100% - 54px);
     width: 300px;
     background-color: gainsboro;
     padding: 20px;
 }
 
-    .sidebar a {
-        display: block;
-        margin-bottom: 10px;
-        color: #333;
-        text-decoration: none;
-    }
+.sidebar a {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    text-decoration: none;
+}
 
-        .sidebar a:hover {
-            color: #000;
-        }
+.sidebar a:hover {
+    color: #000;
+}
+
+
+.topheader {
+    height: 700px;
+    width: 100% !important;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../pictures/pyramids.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 16px;
+}
+
+.pedit {
+    font-size: 20px;
+}
