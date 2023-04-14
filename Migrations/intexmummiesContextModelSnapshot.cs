@@ -3,19 +3,17 @@ using System;
 using Intex2Group22.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Intex2Group22.Migrations.intexmummies
+namespace Intex2Group22.Migrations
 {
     [DbContext(typeof(intexmummiesContext))]
-    [Migration("20230413180446_init")]
-    partial class init
+    partial class intexmummiesContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,6 +306,16 @@ namespace Intex2Group22.Migrations.intexmummies
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -1025,8 +1033,11 @@ namespace Intex2Group22.Migrations.intexmummies
             modelBuilder.Entity("Intex2Group22.Models.Color", b =>
                 {
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<long>("Id"));
 
                     b.Property<int?>("Colorid")
                         .HasColumnType("integer")
@@ -1378,8 +1389,11 @@ namespace Intex2Group22.Migrations.intexmummies
             modelBuilder.Entity("Intex2Group22.Models.Structure", b =>
                 {
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<long>("Id"));
 
                     b.Property<int?>("Structureid")
                         .HasColumnType("integer")
@@ -1436,8 +1450,11 @@ namespace Intex2Group22.Migrations.intexmummies
             modelBuilder.Entity("Intex2Group22.Models.Textile", b =>
                 {
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Burialnumber")
                         .HasMaxLength(200)
@@ -1483,8 +1500,11 @@ namespace Intex2Group22.Migrations.intexmummies
             modelBuilder.Entity("Intex2Group22.Models.Textilefunction", b =>
                 {
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityAlwaysColumn(b.Property<long>("Id"));
 
                     b.Property<int?>("Textilefunctionid")
                         .HasColumnType("integer")

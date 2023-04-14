@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Intex2Group22.Migrations.intexmummies
+namespace Intex2Group22.Migrations
 {
     public partial class init : Migration
     {
@@ -130,6 +130,8 @@ namespace Intex2Group22.Migrations.intexmummies
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    LastName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -368,7 +370,8 @@ namespace Intex2Group22.Migrations.intexmummies
                 name: "color",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
                     value = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     colorid = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -544,7 +547,8 @@ namespace Intex2Group22.Migrations.intexmummies
                 name: "structure",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
                     value = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     structureid = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -582,7 +586,8 @@ namespace Intex2Group22.Migrations.intexmummies
                 name: "textile",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
                     locale = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     textileid = table.Column<int>(type: "integer", nullable: true),
                     description = table.Column<string>(type: "character varying", nullable: true),
@@ -601,7 +606,8 @@ namespace Intex2Group22.Migrations.intexmummies
                 name: "textilefunction",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
                     value = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     textilefunctionid = table.Column<int>(type: "integer", nullable: true)
                 },
