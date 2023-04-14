@@ -54,8 +54,7 @@ namespace Intex2Group22.Controllers
 
 
         [HttpGet]
-        [Authorize(Policy = RoleConstants.Policies.RequireAdmin)]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = RoleConstants.Roles.Administrator)]
         public IActionResult AddForm()
         {
             return View();

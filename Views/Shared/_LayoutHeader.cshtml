@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="~/Intex2Group22.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header style="background-color: #002E5D">
+    <header class="fixed-top"style="background-color: #002E5D">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow text-primary nav navbarupper">
             <div class="container-fluid text-primary">
                 <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">Intex2Group22</a>
@@ -47,25 +47,9 @@
                                 <a class="nav-link text-light" asp-controller="User" asp-action="Index">Users</a>
                             </li>
                         }
-                        <li>
-                            @if (SignInManager.IsSignedIn(User))
-                            {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Role Access
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Admin">Admin</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            }
-                        <li class="nav-item">
+                        
+                            
+                      
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
