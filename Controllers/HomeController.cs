@@ -374,59 +374,59 @@ namespace Intex2Group22.Controllers
 
         }
 
-        [HttpGet]
-        public IActionResult AddTextile(long mummyid)
-        {
-            var burial = repo.Burialmains.Single(x => x.Id == mummyid);
-            if (burial == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet]
+        //public IActionResult AddTextile(long mummyid)
+        //{
+        //    var burial = repo.Burialmains.Single(x => x.Id == mummyid);
+        //    if (burial == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var model = new AddTextileViewModel
-            {
-                Id = mummyid,
-                Textile = new Textile()
-            };
+        //    var model = new AddTextileViewModel
+        //    {
+        //        Id = mummyid,
+        //        Textile = new Textile()
+        //    };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
-        [HttpPost]
-        public IActionResult AddTextile(AddTextileViewModel model)
-        {
-            var burial = repo.Burialmains.Find(model.Id);
-            if (burial == null)
-            {
-                return NotFound();
-            }
+        //[HttpPost]
+        //public IActionResult AddTextile(AddTextileViewModel model)
+        //{
+        //    var burial = repo.Burialmains.Find(model.Id);
+        //    if (burial == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (ModelState.IsValid)
-            {
-                var textile = new Textile
-                {
-                    Description = model.Textile.Description,
-                    Locale = model.Textile.Locale,
-                    Direction = model.Textile.Direction,
-                    Sampledate = model.Textile.Sampledate,
-                    Estimatedperiod = model.Textile.Estimatedperiod
-                };
-                repo.Textiles.Add(textile);
+        //    if (ModelState.IsValid)
+        //    {
+        //        var textile = new Textile
+        //        {
+        //            Description = model.Textile.Description,
+        //            Locale = model.Textile.Locale,
+        //            Direction = model.Textile.Direction,
+        //            Sampledate = model.Textile.Sampledate,
+        //            Estimatedperiod = model.Textile.Estimatedperiod
+        //        };
+        //        repo.Textiles.Add(textile);
 
-                var burialTextile = new BurialmainTextile
-                {
-                    MainBurialmainid = model.Id,
-                    MainTextileid = textile.Id
-                };
-                repo.BurialmainTextiles.Add(burialTextile);
+        //        var burialTextile = new BurialmainTextile
+        //        {
+        //            MainBurialmainid = model.Id,
+        //            MainTextileid = textile.Id
+        //        };
+        //        repo.BurialmainTextiles.Add(burialTextile);
 
-                repo.SaveChanges();
+        //        repo.SaveChanges();
 
-                return RedirectToAction("Details", model.Id);
-            }
+        //        return RedirectToAction("Details", model.Id);
+        //    }
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
 
 
