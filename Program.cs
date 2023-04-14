@@ -65,7 +65,7 @@ AddAuthorizationPolicies(builder.Services);
 AddScoped();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
-{
+{  
     options.CheckConsentNeeded = context =>
     {
         bool hasConsent = context.Request.Cookies["CookieConsent"] == "true"; // Check the value of the server-side flag
