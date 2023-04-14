@@ -4,7 +4,12 @@
 
 @model MummiesViewModel
 
-<h1 class="align-content-center">Mummies</h1>
+<h1 class="align-content-center">
+    Mummies @if (User.IsInRole(RoleConstants.Roles.Administrator))
+    {
+        <a asp-controller="Home" asp-action="AddForm" class="btn btn-outline-primary btn-lg  " style="float:right">Add</a>
+    }
+</h1>
 
 <div class="row m-1 p-1">
     <div id="categories" class="col-3">
@@ -54,8 +59,5 @@
 
 </div>
 </div>
-@if (User.IsInRole(RoleConstants.Roles.Administrator))
-{
-    <a asp-controller="Home" asp-action="AddForm">Add</a>
-}
+
 
