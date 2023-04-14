@@ -126,8 +126,7 @@ foreach (var secret in secrets)
 app.MapGet("/", () =>
 {
     var mySettings = app.Services.GetRequiredService<IOptions<MySettings>>().Value;
-    // Use mySettings object to access the values from appsettings.json and secrets.json
-    // For example, mySettings.ConnectionStrings.DefaultConnection will contain the value from secrets.json
+    
     return Results.Text($"Connection string: {mySettings.ConnectionStrings.DefaultConnection}");
 });
 
@@ -146,7 +145,9 @@ else
     // enable hsts
     app.UseHsts();
 }
-app.UseMiddleware<CspMiddleware>(); // add middleware for CSP header
+
+
+app.UseMiddleware<CspMiddleware>();
 
 
 app.UseHttpsRedirection();
