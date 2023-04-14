@@ -2,3 +2,177 @@
 }
 
 <h1>This is the supervised model page!</h1>
+
+<form method="post" onsubmit="event.preventDefault(); CallInference();">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="sex_M">Sex_M</label>
+        <select class="form-control" id="sex_M" name="sex_M">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="eastwest_W">Eastwest_W</label>
+        <select class="form-control" id="eastwest_W" name="eastwest_W">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Adultsubadult_C">Adultsubadult_C</label>
+        <select class="form-control" id="Adultsubadult_C" name="Adultsubadult_C">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Preservation_SKELETON">Preservation_SKELETON</label>
+        <select class="form-control" id="Preservation_SKELETON" name="Preservation_SKELETON">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Preservation_poorly_preserved">Preservation_poorly_preserved</label>
+        <select class="form-control" id="Preservation_poorly_preserved" name="Preservation_poorly_preserved">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Preservation_skeletalized">Preservation_skeletalized</label>
+        <select class="form-control" id="Preservation_skeletalized" name="Preservation_skeletalized">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Wrapping_H">Wrapping_H</label>
+        <select class="form-control" id="Wrapping_H" name="Wrapping_H">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Wrapping_W">Wrapping_W</label>
+        <select class="form-control" id="Wrapping_W" name="Wrapping_W">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Haircolor_B">Haircolor_B</label>
+        <select class="form-control" id="Haircolor_B" name="Haircolor_B">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Haircolor_D">Haircolor_D</label>
+        <select class="form-control" id="Haircolor_D" name="Haircolor_D">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="eastwest_W">Samplescollected_true</label>
+        <select class="form-control" id="Samplescollected_true" name="Samplescollected_true">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Area_SE">Area_SE</label>
+        <select class="form-control" id="Area_SE" name="Area_SE">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Area_SW">Area_SW</label>
+        <select class="form-control" id="Area_SW" name="Area_SW">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Ageatdeath_C">Ageatdeath_C</label>
+        <select class="form-control" id="Ageatdeath_C" name="Ageatdeath_C">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="Ageatdeath_N">Ageatdeath_N</label>
+        <select class="form-control" id="Ageatdeath_N" name="Ageatdeath_N">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <button type="button" class="btn btn-primary">Submit</button>
+</form>
+
+<p id="result"></p>
+
+<script>
+    async function CallInference() {
+        var json = {
+            // Add properties here
+            Sex_M: parseFloat(document.getElementById("Sex_M").value),
+            EastWest_W: parseFloat(document.getElementById("EastWest_W").value),
+            AdultSubadult_C: parseFloat(document.getElementById("AdultSubadult_C").value),
+            Preservation_SKELETON: parseFloat(document.getElementById("Preservation_SKELETON").value),
+            Preservation_poorly_preserved: parseFloat(document.getElementById("Preservation_poorly_preserved").value),
+            Preservation_skeletalized: parseFloat(document.getElementById("Preservation_skeletalized").value),
+            Wrapping_H: parseFloat(document.getElementById("Wrapping_H").value),
+            Wrapping_W: parseFloat(document.getElementById("Wrapping_W").value),
+            HairColor_B: parseFloat(document.getElementById("HairColor_B").value),
+            HairColor_D: parseFloat(document.getElementById("HairColor_D").value),
+            SamplesCollected_true: parseFloat(document.getElementById("SamplesCollected_true").value),
+            Area_SE: parseFloat(document.getElementById("Area_SE").value),
+            Area_SW: parseFloat(document.getElementById("Area_SW").value),
+            AgeAtDeath_C: parseFloat(document.getElementById("AgeAtDeath_C").value),
+            AgeAtDeath_N: parseFloat(document.getElementById("AgeAtDeath_N").value),
+        }
+
+        // Add validation and JSON serialization here
+        var jsonString = JSON.stringify(json);
+        try {
+            const response = await fetch("https://localhost:7141/predict", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(json)
+            })
+
+            var responseString = await response.text();
+            responseString = JSON.parse(responseString);
+            document.getElementById("result").innerHTML = 'Predicted value: ' + responseString.predictedValue.toFixed(2);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+</script>
+
+
+
+
