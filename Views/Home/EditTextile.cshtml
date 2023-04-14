@@ -2,6 +2,8 @@
 }
 @model Textile
 
+<h1>Edit Textile</h1>
+<div class="container card card-outline-primary bg-light text-left m-1 p-1 mx-auto" style="width: 60rem;">
 <form method="post" asp-action="EditTextile">
 
         <input type="hidden" asp-for="Id">
@@ -19,6 +21,8 @@
         <br />
         <label asp-for="Estimatedperiod">Estimated Period: </label>
         <input asp-for="Estimatedperiod" />
-    <button type="submit">Update</button>
+        <br />
+        <button class="btn btn-primary" style="text-align:center" type="submit">Update</button>
 
 </form>
+</div>

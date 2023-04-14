@@ -51,23 +51,6 @@
                             </li>
                         }
                         <li>
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Role Access
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Index">Roles</a>
-                                    </li>
-
-                                    <li>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Admin">Admin</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
                         <li class="nav-item">
                     </ul>
                     <partial name="_LoginPartial" />

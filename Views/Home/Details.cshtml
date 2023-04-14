@@ -2,46 +2,48 @@
     ViewData["Title"] = "Details";
 }
 @model DetailsViewModel
+@using Intex2Group22.Core;
 
 
     <h1>Mummy Identification Number: @Model.burial.Id</h1>
     
     <br />
-<div class="card card-outline-primary bg-light m-1 p-1">
+<div class="card card-outline-primary bg-light m-1 p-1 mx-auto" style="width: 60rem;">
     <div class="bg-faded p-1">
-    <p class="pedit">Fieldbook Excavation Year: @Model.burial.Fieldbookexcavationyear</p>
-<p class="pedit">Fieldbook Page: @Model.burial.Fieldbookpage</p>
-<p class="pedit">Data Expert Initials: @Model.burial.Dataexpertinitials</p>
-<p class="pedit">Square North South: @Model.burial.Squarenorthsouth</p>
-<p class="pedit">North South: @Model.burial.Northsouth</p>
-<p class="pedit">Square East West: @Model.burial.Squareeastwest</p>
-<p class="pedit">East West: @Model.burial.Eastwest</p>
-<p class="pedit">Area: @Model.burial.Area</p>
-<p class="pedit">Burial Number: @Model.burial.Burialnumber</p>
-<p class="pedit">West to Head: @Model.burial.Westtohead</p>
-<p class="pedit">West to Feet: @Model.burial.Westtofeet</p>
-<p class="pedit">South to Head: @Model.burial.Southtohead</p>
-<p class="pedit">South to Feet: @Model.burial.Southtofeet</p>
-<p class="pedit">Depth: @Model.burial.Depth</p>
-<p class="pedit">Length: @Model.burial.Length</p>
-<p class="pedit">Head Direction: @Model.burial.Headdirection</p>
-<p class="pedit">Preservation: @Model.burial.Preservation</p>
-<p class="pedit">Wrapping: @Model.burial.Wrapping</p>
-<p class="pedit">Age Group: @Model.burial.Adultsubadult</p>
-<p class="pedit">Sex: @Model.burial.Sex</p>
-<p class="pedit">Age at Death: @Model.burial.Ageatdeath</p>
-<p class="pedit">Hair Color: @Model.burial.Haircolor</p>
-<p class="pedit">Samples Collected: @Model.burial.Samplescollected</p>
-<p class="pedit">Goods: @Model.burial.Goods</p>
-<p class="pedit">Face Bundles: @Model.burial.Facebundles</p>
-<p class="pedit">Text: @Model.burial.Text</p>
-<p class="pedit">Burial Id: @Model.burial.Burialid</p>
-<p class="pedit">Date of Excavation: @Model.burial.Dateofexcavation</p>
-<p class="pedit">Shaft Number: @Model.burial.Shaftnumber</p>
-<p class="pedit">Cluster Number: @Model.burial.Clusternumber</p>
-<p class="pedit">Burial Materials: @Model.burial.Burialmaterials</p>
-<p class="pedit">Excavation Recorder: @Model.burial.Excavationrecorder</p>
-<p class="pedit">Hair: @Model.burial.Hair</p>
+        <p class="pedit">Square North South: @Model.burial.Squarenorthsouth</p>
+        <p class="pedit">North South: @Model.burial.Northsouth</p>
+        <p class="pedit">Square East West: @Model.burial.Squareeastwest</p>
+        <p class="pedit">East West: @Model.burial.Eastwest</p>
+        <p class="pedit">Area: @Model.burial.Area</p>
+        <p class="pedit">Burial Number: @Model.burial.Burialnumber</p>
+    <p >Fieldbook Excavation Year: @Model.burial.Fieldbookexcavationyear</p>
+<p>Fieldbook Page: @Model.burial.Fieldbookpage</p>
+<p>Data Expert Initials: @Model.burial.Dataexpertinitials</p>
+
+<p >West to Head: @Model.burial.Westtohead</p>
+<p >West to Feet: @Model.burial.Westtofeet</p>
+<p >South to Head: @Model.burial.Southtohead</p>
+<p >South to Feet: @Model.burial.Southtofeet</p>
+<p >Depth: @Model.burial.Depth</p>
+<p >Length: @Model.burial.Length</p>
+<p >Head Direction: @Model.burial.Headdirection</p>
+<p >Preservation: @Model.burial.Preservation</p>
+<p >Wrapping: @Model.burial.Wrapping</p>
+<p >Age Group: @Model.burial.Adultsubadult</p>
+<p >Sex: @Model.burial.Sex</p>
+<p >Age at Death: @Model.burial.Ageatdeath</p>
+<p >Hair Color: @Model.burial.Haircolor</p>
+<p >Samples Collected: @Model.burial.Samplescollected</p>
+<p >Goods: @Model.burial.Goods</p>
+<p >Face Bundles: @Model.burial.Facebundles</p>
+<p >Text: @Model.burial.Text</p>
+<p >Burial Id: @Model.burial.Burialid</p>
+<p >Date of Excavation: @Model.burial.Dateofexcavation</p>
+<p >Shaft Number: @Model.burial.Shaftnumber</p>
+<p >Cluster Number: @Model.burial.Clusternumber</p>
+<p >Burial Materials: @Model.burial.Burialmaterials</p>
+<p >Excavation Recorder: @Model.burial.Excavationrecorder</p>
+<p >Hair: @Model.burial.Hair</p>
 </div></div>
     <br />
 @*<a class="btn btn-primary" asp-controller="Home" asp-action="AddTextile" asp-route-mummyid="@Model.burial.Id">Add Textile</a>*@
@@ -49,14 +51,17 @@
 <br/>
     @foreach (Textile t in Model.textiles)
     {
-    <div class="card card-outline-primary bg-light m-1 p-1">
+    <div class="card card-outline-primary bg-light m-1 p-1 mx-auto" style="width: 60rem;">
         <div class="bg-faded p-1">
            <p class="pedit">Textile Description: @t.Description</p>
             <p>Locality: @t.Locale</p>
-            <p>Directions: @t.Direction</p>
-            <a class="btn btn-primary" asp-controller="Home" asp-action="EditTextile" asp-route-textileid="@t.Id">Edit Textile</a>
-            <br/>
-            <br/>
+            <p>Directions: @t.Direction
+                @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                {
+                    <a class="btn btn-primary" asp-controller="Home" asp-action="EditTextile" asp-route-textileid="@t.Id" style="float:right">Edit Textile</a>
+                }
+            </p>
+                
             @foreach (ColorTextile ct in Model.coltexts)
             {
                 @if (t.Id == ct.MainTextileid)
@@ -65,11 +70,14 @@
                     {
                         @if (c.Id == ct.MainColorid)
                         {
-                            <p class="pedit">Textile Color: @c.Value</p>
-                        <a class="btn btn-primary" asp-controller="Home" asp-action="EditColor" asp-route-colorid="@c.Id">Edit Color</a>
-                        <br/>
-                        <br/>
-                        }   
+                            <p class="pedit">Textile Color: @c.Value
+                                @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                                {
+                                        <a class="btn btn-primary" asp-controller="Home" asp-action="EditColor" asp-route-colorid="@c.Id" style="float:right">Edit Color</a>
+                                 }
+                                </p>
+
+            }   
                     }
                 }
             }
@@ -82,10 +90,14 @@
                     {
                         @if (tf.Id == tft.MainTextilefunctionid)
                         {
-                            <p class="pedit">Function: @tf.Value</p>
-                        <a class="btn btn-primary" asp-controller="Home" asp-action="EditFunction" asp-route-functionid="@tf.Id">Edit Function</a>
-                        <br/>
-                        <br/>
+                            
+                            <p class="pedit">Function: @tf.Value
+                                @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                                {
+                                    <a class="btn btn-primary" asp-controller="Home" asp-action="EditFunction" asp-route-functionid="@tf.Id" style="float:right">Edit Function</a>
+                                }
+                            </p>
+                            
                     }
                         }
                     }
@@ -98,10 +110,13 @@
                 {
                     @if (st.MainStructureid == s.Id)
                     {
-                            <p class="pedit">Structure: @s.Value</p>
-                        <a class="btn btn-primary" asp-controller="Home" asp-action="EditStructure" asp-route-structureid="@s.Id">Edit Structure</a>
-                        <br/>
-                        <br/>
+                            <p class="pedit">Structure: @s.Value
+                                @if (User.IsInRole(RoleConstants.Roles.Administrator))
+                                {
+                                    <a class="btn btn-primary" asp-controller="Home" asp-action="EditStructure" asp-route-structureid="@s.Id" style="float:right">Edit Structure</a>
+                                }
+                            </p>
+                       
                     }
                 }
             }
@@ -113,40 +128,43 @@
     }
 
     @foreach (Bodyanalysischart bac in Model.charts)
-{   <div class="card card-outline-primary bg-light m-1 p-1">
+{
+       <div class="card card-outline-primary bg-light m-1 p-1 mx-auto" style="width: 60rem;">
         <div class="bg-faded p-1">
             <p class="pedit">BurialId: @bac.Burialid</p>
             <p class="pedit">Area: @bac.Area</p>
-            <p class="pedit">Observations: @bac.Observations</p>
-            <p class="pedit">Robust: @bac.Robust</p>
-            <p class="pedit">Supraorbital ridges: @bac.Supraorbitalridges</p>
-            <p class="pedit">Orbit edge: @bac.Orbitedge</p>
-            <p class="pedit">Parietal blossing: @bac.Parietalblossing</p>
-            <p class="pedit">Gonion: @bac.Gonion</p>
-            <p class="pedit">Nuchal crest: @bac.Nuchalcrest</p>
-            <p class="pedit">Sphenooccipital synchondrosis: @bac.Sphenooccipitalsynchondrosis</p>
-            <p class="pedit">Lambdoid suture: @bac.Lambdoidsuture</p>
-            <p class="pedit">Squamos suture: @bac.Squamossuture</p>
-            <p class="pedit">Tooth attrition: @bac.Toothattrition</p>
-            <p class="pedit">Tooth eruption age estimation: @bac.Tootheruptionageestimation</p>
-            <p class="pedit">Ventral arc: @bac.Ventralarc</p>
-            <p class="pedit">Subpubic angle: @bac.Subpubicangle</p>
-            <p class="pedit">Sciatic notch: @bac.Sciaticnotch</p>
-            <p class="pedit">Medical Ip Ramus: @bac.MedicalIpRamus</p>
-            <p class="pedit">Femur: @bac.Femur</p>
-            <p class="pedit">Femur head diameter: @bac.Femurheaddiameter</p>
-            <p class="pedit">Femur length: @bac.Femurlength</p>
-            <p class="pedit">Humerus: @bac.Humerus</p>
-            <p class="pedit">Humerus head diameter: @bac.Humerusheaddiameter</p>
-            <p class="pedit">Humerus length: @bac.Humeruslength</p>
-            <p class="pedit">Estimate stature: @bac.Estimatestature</p>
-            <p class="pedit">Osteophytosis: @bac.Osteophytosis</p>
-            <p class="pedit">Caries Periodontal Disease: @bac.CariesPeriodontalDisease</p>
-            <p class="pedit">Notes: @bac.Notes</p>
+            <p >Observations: @bac.Observations</p>
+            <p >Robust: @bac.Robust</p>
+            <p >Supraorbital ridges: @bac.Supraorbitalridges</p>
+            <p >Orbit edge: @bac.Orbitedge</p>
+            <p >Parietal blossing: @bac.Parietalblossing</p>
+            <p >Gonion: @bac.Gonion</p>
+            <p >Nuchal crest: @bac.Nuchalcrest</p>
+            <p >Sphenooccipital synchondrosis: @bac.Sphenooccipitalsynchondrosis</p>
+            <p >Lambdoid suture: @bac.Lambdoidsuture</p>
+            <p >Squamos suture: @bac.Squamossuture</p>
+            <p >Tooth attrition: @bac.Toothattrition</p>
+            <p >Tooth eruption age estimation: @bac.Tootheruptionageestimation</p>
+            <p >Ventral arc: @bac.Ventralarc</p>
+            <p >Subpubic angle: @bac.Subpubicangle</p>
+            <p >Sciatic notch: @bac.Sciaticnotch</p>
+            <p >Medical Ip Ramus: @bac.MedicalIpRamus</p>
+            <p >Femur: @bac.Femur</p>
+            <p >Femur head diameter: @bac.Femurheaddiameter</p>
+            <p >Femur length: @bac.Femurlength</p>
+            <p >Humerus: @bac.Humerus</p>
+            <p >Humerus head diameter: @bac.Humerusheaddiameter</p>
+            <p >Humerus length: @bac.Humeruslength</p>
+            <p >Estimate stature: @bac.Estimatestature</p>
+            <p >Osteophytosis: @bac.Osteophytosis</p>
+            <p >Caries Periodontal Disease: @bac.CariesPeriodontalDisease</p>
+            <p >Notes: @bac.Notes</p>
 
 
-
-            <a class="btn btn-primary"  asp-controller="Home" asp-action="EditBodyChart" asp-route-chartid="@bac.Burialid">Edit Chart</a>
+            @if (User.IsInRole(RoleConstants.Roles.Administrator))
+            {
+                <a class="btn btn-primary"  asp-controller="Home" asp-action="EditBodyChart" asp-route-chartid="@bac.Burialid">Edit Chart</a>
+            }
         </div>
     </div>
 }

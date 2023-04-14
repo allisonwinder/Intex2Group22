@@ -2,13 +2,15 @@
 }
 
 @model Textilefunction
-
+<h1>Edit Function</h1>
+<div class="container card card-outline-primary bg-light text-left m-1 p-1 mx-auto" style="width: 60rem;">
 <form method="post" asp-action="EditStructure">
 
     <input type="hidden" asp-for="Id">
     <label asp-for="Value">Description: </label>
     <input asp-for="Value">
     <br />
-    <button type="submit">Update</button>
+        <button class="btn btn-primary" style="text-align:center" type="submit">Update</button>
 
 </form>
+</div>
