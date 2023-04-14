@@ -19,7 +19,7 @@ public class CspMiddleware
 
         string nonceValue = Convert.ToBase64String(nonceBytes);
         context.Items["NonceValue"] = nonceValue; // Store nonceValue in HttpContext.Items
-        context.Response.Headers.Add("Content-Security-Policy", $"default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'nonce-{nonceValue}' ; style-src  'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; frame-src 'self'");
+        context.Response.Headers.Add("Content-Security-Policy", $"default-src 'self' 'unsafe-inline'; script-src 'unsafe-inline' 'self' 'nonce-{nonceValue}' ; style-src  'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; frame-src 'self'");
         await _next(context);
     }
 }
