@@ -1,9 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Http.Features
+<link rel="stylesheet" href="~/css/site.css" />
 
 @{
     var consentFeatureFlag = Context.Features.Get<ITrackingConsentFeature>();
     var showBannerFlag = !consentFeatureFlag?.CanTrack ?? false;
     var cookieStr = consentFeatureFlag?.CreateConsentCookie();
+    var nonceValue = Context.Items["NonceValue"] as string; // Retrieve nonceValue from Context.Items
 }
 
 <style>
@@ -54,14 +56,14 @@
 
 @if (showBannerFlag)
 {
-    <div id="testDiv">
+    <div id="testDiv" class="testDivbutton">
         <h3 class="display-6">Cookie Policy</h3>
         <p>PLEASE ACCEPT OUR <a asp-page="/CookiePolicy">COOKIE POLICY</a>.   </p>
         <button type="button" data-cookie-string="@cookieStr">
             <span aria-hidden="true">Accept</span>
         </button>
     </div>
-    <script type="text/javascript">
+    <script type="text/javascript" nonce="@nonceValue">
         $(document).ready(function () {
             $("#testDiv button[data-cookie-string]").bind("click", function () {
                 document.cookie = $("#testDiv button").attr("data-cookie-string");
@@ -69,4 +71,4 @@
             });
         });
     </script>
-}  
+}

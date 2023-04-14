@@ -1,0 +1,21 @@
+﻿@{
+}
+
+@model Color
+
+
+<div class="container text-center">
+    <form method="post" asp-action="EditColor">
+        <input type="hidden" asp-for="Id" />
+        <label asp-for="Value">Color: </label>
+        <select asp-for="Value">
+            @foreach (Color c in ViewBag.Colors)
+            {
+                <option value="@c.Value">@c.Value</option>
+            }
+            </select>
+        <button type="submit">Submit Mummy</button>
+
+    </form>
+
+</div>

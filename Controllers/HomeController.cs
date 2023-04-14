@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 using Microsoft.EntityFrameworkCore;
 using Intex2Group22.Core;
+using Microsoft.Data.SqlClient.Server;
 
 namespace Intex2Group22.Controllers
 {
@@ -22,19 +23,22 @@ namespace Intex2Group22.Controllers
         {
             repo = temp;
         }
-
+        int visits = 0;
         public IActionResult Index()
         {
             //// update the visits counter
             //var visitString = Request.Cookies["visits"];
-            //int visit = 0;
+            
             //int.TryParse(visitString, out visits);
             //visits++;
 
             //Response.Cookies.Append("visits", visits.ToString());
 
-            //ViewBag.visits = visitString;
+            //ViewBag.visits = visits;
 
+            ////CookieOptions options = new CookieOptions();
+            ////options.Expires = DateTime.Now.AddDays(365);
+            ////Respo
             return View();
         }
 
@@ -60,6 +64,8 @@ namespace Intex2Group22.Controllers
                 }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
+
         public IActionResult AddForm(Burialmain bm)
         {
             if (ModelState.IsValid)
@@ -76,14 +82,15 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Edit(long formid)
         {
-            //ViewBag.Majors but change = repo.ToList();
             var form = repo.Burialmains.Single(x => x.Id == formid);
             return View("EditForm", form);
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")] //limit certain actions to the Administrators
         public IActionResult Edit(Burialmain bm)
         {
             repo.Burialmains.Update(bm);
@@ -166,6 +173,7 @@ namespace Intex2Group22.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Roles.Administrator}")]
         public IActionResult Delete(long formid)
         {
             var forms = repo.Burialmains.Single(x => x.Id == formid);
@@ -185,7 +193,7 @@ namespace Intex2Group22.Controllers
         
         public IActionResult Check(int pageNum=1)
         {
-            int pageSize = 50;
+           // int pageSize = 50;
 
             var joinData = from bm in repo.Burialmains
                            join bmt in repo.BurialmainTextiles on bm.Id equals bmt.MainBurialmainid into bmtGroup
@@ -291,6 +299,110 @@ namespace Intex2Group22.Controllers
             return View(data);
         }
 
+        [HttpGet]
+        public IActionResult EditColor(long colorid)
+        {
+            ViewBag.Colors = repo.Colors;
+            var form = repo.Colors.Single(x => x.Id == colorid);
+            return View("EditColor", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditColor(Color c)
+        {
+
+            repo.Colors.Update(c);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+        }
+
+        [HttpGet]
+        public IActionResult EditTextile (long textileid)
+        {
+            var form = repo.Textiles.Single(x => x.Id == textileid);
+            return View("EditTextile", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditTextile(Textile t)
+        {
+
+            repo.Textiles.Update(t);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+
+        }
+
+        [HttpGet]
+        public IActionResult EditStructure(long structureid)
+        {
+            var form = repo.Structures.Single(x => x.Id == structureid);
+            return View("EditStructure", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditStructure(Structure s)
+        {
+
+            repo.Structures.Update(s);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+
+        }
+
+        [HttpGet]
+        public IActionResult EditFunction(long functionid)
+        {
+            var form = repo.Textilefunctions.Single(x => x.Id == functionid);
+            return View("EditFunction", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditFunction(Textilefunction tf)
+        {
+
+            repo.Textilefunctions.Update(tf);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+
+        }
+
+        [HttpGet]
+        public IActionResult EditBodyChart(string chartid)
+        {
+            var form = repo.Bodyanalysischarts.Single(x => x.Burialid == chartid);
+            return View("EditBodyChart", form);
+        }
+
+
+        [HttpPost]
+
+        public IActionResult EditBodyChart(Bodyanalysischart bac)
+        {
+
+            repo.Bodyanalysischarts.Update(bac);
+            repo.SaveChanges();
+
+            return RedirectToAction("allMummies");
+
+        }
+
+
+
     }
 
 }
+
+// 19140298416325769

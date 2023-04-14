@@ -1,24 +1,25 @@
-﻿namespace Intex2Group22.Controllers
-{
-
-using Microsoft.Net.Http.Headers;
-using Microsoft.AspNetCore.Http.Headers;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
 public class CspMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public CspMiddleware(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
-
-        public CspMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
-
-        public async Task InvokeAsync(HttpContext context)
-        {
-            context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'"); // Define CSP Policy here
-            await _next(context);
-        }
+        _next = next;
     }
 
+    public async Task InvokeAsync(HttpContext context)
+    {
+        byte[] nonceBytes = new byte[32]; // 32 bytes for a 256-bit nonce, you can adjust the size as needed
+        using (var rng = new RNGCryptoServiceProvider())
+        {
+            rng.GetBytes(nonceBytes);
+        }
+
+        string nonceValue = Convert.ToBase64String(nonceBytes);
+        context.Items["NonceValue"] = nonceValue; // Store nonceValue in HttpContext.Items
+        context.Response.Headers.Add("Content-Security-Policy", $"default-src 'self' 'unsafe-inline'; script-src 'self' 'nonce-{nonceValue}' ; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
+        await _next(context);
+    }
 }

@@ -21,3 +21,92 @@ header {
     background-color: #002E5D;
     color: #FFFFFF;
 }
+
+testDiv {
+    z-index: 1000;
+    position: fixed;
+    width: 400px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 30px 20px 30px;
+    font-family: 'Century Gothic', sans-serif;
+    box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    border-radius: 30px 30px 0 0;
+}
+
+testDivbutton {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    background-color: green;
+    padding: 10px 50px;
+    margin-top: -5px;
+    color: white;
+    transition: all ease 0.5s;
+}
+
+testDiv button:hover {
+    background-color: darkgreen;
+}
+
+testDiv h3 {
+    font-size: 22px;
+}
+
+testDiv p {
+    font-size: 13px;
+}
+
+testDiv a {
+    color: gray;
+    text-decoration: underline;
+}
+
+.info {
+    font-size: 20px;
+}
+
+body {
+    background-color: gainsboro;
+}
+
+.landingheader {
+    font-family: Constantia;
+    font-weight: bold;
+    font-size: 100px;
+}
+
+.privacyheader {
+    font-family: Constantia;
+    font-size: 80px;
+}
+
+.privacyh4 {
+    font-size: 25px;
+    font-style: italic;
+}
+
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 58px;
+    height: calc(100% - 58px);
+    width: 300px;
+    background-color: gainsboro;
+    padding: 20px;
+}
+
+    .sidebar a {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        text-decoration: none;
+    }
+
+        .sidebar a:hover {
+            color: #000;
+        }
