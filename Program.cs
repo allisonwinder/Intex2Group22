@@ -74,10 +74,10 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 # region Sekreto
-var config = new ConfigurationBuilder()
-    .AddUserSecrets<Program>()
-    .Build();
-Console.WriteLine($"Hello, {config["Name"]}");
+//var config = new ConfigurationBuilder()
+//    .AddUserSecrets<Program>()
+//    .Build();
+//Console.WriteLine($"Hello, {config["Name"]}");
 
 # endregion
 
