@@ -10,7 +10,7 @@ using Intex2Group22.Core.Repositories;
 using Intex2Group22.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpsPolicy;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -30,6 +30,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -71,7 +72,9 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1;
 });
 
-
+//builder.Services.Configure<RoleConstants>(options =>
+//    options
+//);
 
 var app = builder.Build();
 
@@ -88,11 +91,7 @@ else
     app.UseHsts();
 }
 app.UseMiddleware<CspMiddleware>(); // add middleware for CSP header
-//app.Use(async (context, next) => {
-//    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
 
-//    await next();
-//});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

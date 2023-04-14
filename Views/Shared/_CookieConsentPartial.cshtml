@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http.Features
-<link rel="stylesheet" href="~/css/site.css" />
+@*<link rel="stylesheet" href="~/css/site.css" />*@
 
 @{
     var consentFeatureFlag = Context.Features.Get<ITrackingConsentFeature>();
@@ -56,7 +56,7 @@
 
 @if (showBannerFlag)
 {
-    <div id="testDiv" class="testDivbutton">
+    <div id="testDiv" >
         <h3 class="display-6">Cookie Policy</h3>
         <p>PLEASE ACCEPT OUR <a asp-page="/CookiePolicy">COOKIE POLICY</a>.   </p>
         <button type="button" data-cookie-string="@cookieStr">
