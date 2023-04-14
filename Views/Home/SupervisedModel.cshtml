@@ -3,174 +3,196 @@
 
 <h1>This is the supervised model page!</h1>
 
-<form method="post" onsubmit="event.preventDefault(); CallInference();">
+<form asp-controller="Onnx" asp-action="Score" method="post" onsubmit="event.preventDefault(); CallInference();">
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <label for="sex_M">Sex_M</label>
-        <select class="form-control" id="sex_M" name="sex_M">
-            <option value="0">0</option>
-            <option value="1">1</option>
+        <label for="Sex_M">Female or Male?</label> <select class="form-control" id="Sex_M" name="Sex_M">
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+        </select>
+
+    </div>
+
+    <div class="form-group">
+        <label for="EastWest_W">East or West coordinate plane?</label>
+        <select class="form-control" id="EastWest_W" name="EastWest_W">
+            <option value="0">East</option>
+            <option value="1">West</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="eastwest_W">Eastwest_W</label>
-        <select class="form-control" id="eastwest_W" name="eastwest_W">
-            <option value="0">0</option>
-            <option value="1">1</option>
+        <label for="AdultSubadult_C">Adult or Child?</label>
+        <select class="form-control" id="AdultSubadult_C" name="AdultSubadult_C">
+            <option value="0">Adult</option>
+            <option value="1">Child</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Adultsubadult_C">Adultsubadult_C</label>
-        <select class="form-control" id="Adultsubadult_C" name="Adultsubadult_C">
-            <option value="0">0</option>
-            <option value="1">1</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label for="Preservation_SKELETON">Preservation_SKELETON</label>
+        <label for="Preservation_SKELETON">Bare skeleton?</label>
         <select class="form-control" id="Preservation_SKELETON" name="Preservation_SKELETON">
-            <option value="0">0</option>
-            <option value="1">1</option>
+            <option value="0">Well preserved</option>
+            <option value="1">Only bare skeleton</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Preservation_poorly_preserved">Preservation_poorly_preserved</label>
+        <label for="Preservation_poorly_preserved">Evidence of poor preservation?</label>
         <select class="form-control" id="Preservation_poorly_preserved" name="Preservation_poorly_preserved">
-            <option value="0">0</option>
-            <option value="1">1</option>
+            <option value="0">Well preserved</option>
+            <option value="1">Evidence of poor preservation</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Preservation_skeletalized">Preservation_skeletalized</label>
+        <label for="Preservation_skeletalized">Evidence of mildly well preservation?</label>
         <select class="form-control" id="Preservation_skeletalized" name="Preservation_skeletalized">
-            <option value="0">0</option>
-            <option value="1">1</option>
+            <option value="0">Well preserved</option>
+            <option value="1">Evidence of mildly well preservation</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Wrapping_H">Wrapping_H</label>
+        <label for="Wrapping_H">Body mostly or fully wrapped?</label>
         <select class="form-control" id="Wrapping_H" name="Wrapping_H">
-            <option value="0">0</option>
-            <option value="1">1</option>
+            <option value="0">Body not wrapped</option>
+            <option value="1">Body mostly or fully wrapped</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Wrapping_W">Wrapping_W</label>
+        <label for="Wrapping_W">Body partially wrapped</label>
         <select class="form-control" id="Wrapping_W" name="Wrapping_W">
-            <option value="0">0</option>
-            <option value="1">1</option>
+            <option value="0">Body not wrapped</option>
+            <option value="1">Body partially wrapped</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Haircolor_B">Haircolor_B</label>
-        <select class="form-control" id="Haircolor_B" name="Haircolor_B">
-            <option value="0">0</option>
-            <option value="1">1</option>
+        <label for="HairColor_B">Hair color brown?</label>
+        <select class="form-control" id="HairColor_B" name="HairColor_B">
+            <option value="0">Hair color unknown</option>
+            <option value="1">Hair color brown</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Haircolor_D">Haircolor_D</label>
-        <select class="form-control" id="Haircolor_D" name="Haircolor_D">
-            <option value="0">0</option>
-            <option value="1">1</option>
+        <label for="HairColor_D">Hair color blonde?</label>
+        <select class="form-control" id="HairColor_D" name="HairColor_D">
+            <option value="0">Hair color unknown</option>
+            <option value="1">Hair color blonde</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="eastwest_W">Samplescollected_true</label>
-        <select class="form-control" id="Samplescollected_true" name="Samplescollected_true">
-            <option value="0">0</option>
-            <option value="1">1</option>
+        <label for="SamplesCollected_true">Samples collected?</label>
+        <select class="form-control" id="SamplesCollected_true" name="SamplesCollected_true">
+            <option value="0">False</option>
+            <option value="1">True</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Area_SE">Area_SE</label>
+        <label for="Area_SE">Southeast area?</label>
         <select class="form-control" id="Area_SE" name="Area_SE">
-            <option value="0">0</option>
-            <option value="1">1</option>
+            <option value="0">False</option>
+            <option value="1">True</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Area_SW">Area_SW</label>
+        <label for="Area_SW">Southwest area?</label>
         <select class="form-control" id="Area_SW" name="Area_SW">
-            <option value="0">0</option>
-            <option value="1">1</option>
+            <option value="0">False</option>
+            <option value="1">True</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label for="Ageatdeath_C">Ageatdeath_C</label>
-        <select class="form-control" id="Ageatdeath_C" name="Ageatdeath_C">
-            <option value="0">0</option>
-            <option value="1">1</option>
+        <label for="AgeAtDeath_C">Died as a child?</label>
+        <select class="form-control" id="AgeAtDeath_C" name="AgeAtDeath_C">
+            <option value="0">Adult</option>
+            <option value="1">Child</option>
         </select>
     </div>
 
 
     <div class="form-group">
-        <label for="Ageatdeath_N">Ageatdeath_N</label>
-        <select class="form-control" id="Ageatdeath_N" name="Ageatdeath_N">
-            <option value="0">0</option>
-            <option value="1">1</option>
+        <label for="AgeAtDeath_N">Died as an infant?</label>
+        <select class="form-control" id="AgeAtDeath_N" name="AgeAtDeath_N">
+            <option value="0">Adult</option>
+            <option value="1">Newborn</option>
         </select>
     </div>
 
-    <button type="button" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-primary" onclick="CallInference();">Submit</button>
 </form>
 
 <p id="result"></p>
 
 <script>
-    async function CallInference() {
+    function CallInference() {
         var json = {
             // Add properties here
-            Sex_M: parseFloat(document.getElementById("Sex_M").value),
-            EastWest_W: parseFloat(document.getElementById("EastWest_W").value),
-            AdultSubadult_C: parseFloat(document.getElementById("AdultSubadult_C").value),
-            Preservation_SKELETON: parseFloat(document.getElementById("Preservation_SKELETON").value),
-            Preservation_poorly_preserved: parseFloat(document.getElementById("Preservation_poorly_preserved").value),
-            Preservation_skeletalized: parseFloat(document.getElementById("Preservation_skeletalized").value),
-            Wrapping_H: parseFloat(document.getElementById("Wrapping_H").value),
-            Wrapping_W: parseFloat(document.getElementById("Wrapping_W").value),
-            HairColor_B: parseFloat(document.getElementById("HairColor_B").value),
-            HairColor_D: parseFloat(document.getElementById("HairColor_D").value),
-            SamplesCollected_true: parseFloat(document.getElementById("SamplesCollected_true").value),
-            Area_SE: parseFloat(document.getElementById("Area_SE").value),
-            Area_SW: parseFloat(document.getElementById("Area_SW").value),
-            AgeAtDeath_C: parseFloat(document.getElementById("AgeAtDeath_C").value),
-            AgeAtDeath_N: parseFloat(document.getElementById("AgeAtDeath_N").value),
+            "Sex_M": parseFloat(document.getElementById("Sex_M").value),
+            "EastWest_W": parseFloat(document.getElementById("EastWest_W").value),
+            "AdultSubadult_C": parseFloat(document.getElementById("AdultSubadult_C").value),
+            "Preservation_SKELETON": parseFloat(document.getElementById("Preservation_SKELETON").value),
+            "Preservation_poorly_preserved": parseFloat(document.getElementById("Preservation_poorly_preserved").value),
+            "Preservation_skeletalized": parseFloat(document.getElementById("Preservation_skeletalized").value),
+            "Wrapping_H": parseFloat(document.getElementById("Wrapping_H").value),
+            "Wrapping_W": parseFloat(document.getElementById("Wrapping_W").value),
+            "HairColor_B": parseFloat(document.getElementById("HairColor_B").value),
+            "HairColor_D": parseFloat(document.getElementById("HairColor_D").value),
+            "SamplesCollected_true": parseFloat(document.getElementById("SamplesCollected_true").value),
+            "Area_SE": parseFloat(document.getElementById("Area_SE").value),
+            "Area_SW": parseFloat(document.getElementById("Area_SW").value),
+            "AgeAtDeath_C": parseFloat(document.getElementById("AgeAtDeath_C").value),
+            "AgeAtDeath_N": parseFloat(document.getElementById("AgeAtDeath_N").value)
         }
+
+        console.log(json)
 
         // Add validation and JSON serialization here
-        var jsonString = JSON.stringify(json);
-        try {
-            const response = await fetch("https://localhost:7141/predict", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(json)
+        fetch('/predict', {
+            method: 'POST',
+            body: JSON.stringify(json),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(prediction => {
+                console.log(prediction);
+                // Update the h4 tag with the prediction result
+                document.querySelector('#result').textContent = String("Predicted head direction: " + prediction.predictedValue);
+                console.log("it got here at least");
             })
+            .catch(error => {
+                alert("Something went wrong...");
+            });
+ }
 
-            var responseString = await response.text();
-            responseString = JSON.parse(responseString);
-            document.getElementById("result").innerHTML = 'Predicted value: ' + responseString.predictedValue.toFixed(2);
 
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    //    var jsonString = JSON.stringify(json);
+    //    try {
+    //        const response = await fetch("https://localhost:7141/predict", {
+    //            method: 'POST',
+    //            headers: {
+    //                'Content-Type': 'application/json'
+    //            },
+    //            body: JSON.stringify(json)
+    //        })
+
+    //        var responseString = await response.text();
+    //        responseString = JSON.parse(responseString);
+    //        document.getElementById("result").innerHTML = 'Predicted value: ' + responseString.PredictedValue;
+
+    //    } catch (error) {
+    //        console.error(error);
+    //    }
+    //}
 </script>
 
 

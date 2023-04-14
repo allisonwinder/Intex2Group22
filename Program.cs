@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.ML.OnnxRuntime;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Build.Evaluation;
+using Microsoft.Extensions.Options;
+using static Intex2Group22.Controllers.AppSettingsConnection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -47,6 +51,11 @@ builder.Services.AddHsts(options =>
 
 builder.Services.AddControllersWithViews();
 
+
+
+builder.Services.AddAuthentication();
+
+
 #region Authorization
 
 AddAuthorizationPolicies(builder.Services);
@@ -59,6 +68,8 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     options.CheckConsentNeeded = context => true;
     options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.ConsentCookie.SecurePolicy = CookieSecurePolicy.Always;
+    
 });
 
 builder.Services.AddSingleton<InferenceSession>(
@@ -79,6 +90,18 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 1;
 });
 
+
+
+builder.Configuration.AddUserSecrets<Project>();
+
+
+
+
+
+
+
+
+
 # region Sekreto
 //var config = new ConfigurationBuilder()
 //    .AddUserSecrets<Program>()
@@ -89,6 +112,24 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 
 var app = builder.Build();
+
+//var secrets = app.Configuration.GetSection("ConnectionStrings").GetChildren();
+//var appSettings = app.Configuration.GetSection("AppSettings");
+
+//foreach (var secret in secrets)
+//{
+//    appSettings[secret.Key] = secret.Value;
+//}
+
+//app.MapGet("/", () =>
+//{
+//    var mySettings = app.Services.GetRequiredService<IOptions<MySettings>>().Value;
+
+//    return Results.Text($"Connection string: {mySettings.ConnectionStrings.DefaultConnection}");
+//});
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -102,7 +143,9 @@ else
     // enable hsts
     app.UseHsts();
 }
-app.UseMiddleware<CspMiddleware>(); // add middleware for CSP header
+
+
+app.UseMiddleware<CspMiddleware>();
 
 
 app.UseHttpsRedirection();
@@ -120,7 +163,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapDefaultControllerRoute();
 
-
+//app.UseIdentityServer();
 app.MapRazorPages();
 
 app.Run();
