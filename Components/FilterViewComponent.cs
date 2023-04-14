@@ -17,7 +17,11 @@ namespace Intex2Group22.Components
                 .Where(x => x.Haircolor != null && x.Haircolor != "")
                 .Select(x => x.Haircolor)
                 .Distinct();
-                
+
+            var burialid = repo.Burialmains
+                .Where(x => x.Burialid != null && x.Burialid != "")
+                .Select(x => x.Burialid)
+                .Distinct();
 
             var sex = repo.Burialmains
                 .Where(x => x.Sex != null && x.Sex != "")
@@ -81,7 +85,8 @@ namespace Intex2Group22.Components
                 SquareEastWest = squareEeastWest,
                 EastWest = eastWest,
                 Area = area,
-                BurialNumber = burialNumber
+                BurialNumber = burialNumber,
+                BurialId = burialid
             };
             
 
