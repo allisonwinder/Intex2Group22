@@ -253,6 +253,10 @@ namespace Intex2Group22.Models
 
                 entity.Property(e => e.Email).HasMaxLength(256);
 
+                entity.Property(e => e.FirstName).HasMaxLength(255);
+
+                entity.Property(e => e.LastName).HasMaxLength(255);
+
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
@@ -806,8 +810,8 @@ namespace Intex2Group22.Models
                 entity.ToTable("color");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Colorid).HasColumnName("colorid");
 
@@ -1092,8 +1096,8 @@ namespace Intex2Group22.Models
                 entity.ToTable("structure");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Structureid).HasColumnName("structureid");
 
@@ -1138,8 +1142,8 @@ namespace Intex2Group22.Models
                 entity.ToTable("textile");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Burialnumber)
                     .HasMaxLength(200)
@@ -1177,8 +1181,8 @@ namespace Intex2Group22.Models
                 entity.ToTable("textilefunction");
 
                 entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                    .HasColumnName("id")
+                    .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Textilefunctionid).HasColumnName("textilefunctionid");
 

@@ -188,29 +188,6 @@ namespace Intex2Group22.Controllers
             return RedirectToAction("allMummies");
         }
 
-        
-        public IActionResult Check(int pageNum=1)
-        {
-           // int pageSize = 50;
-
-            var joinData = from bm in repo.Burialmains
-                           join bmt in repo.BurialmainTextiles on bm.Id equals bmt.MainBurialmainid into bmtGroup
-                           from bmtLeft in bmtGroup.DefaultIfEmpty()
-                           join t in repo.Textiles on (bmtLeft != null ? bmtLeft.MainTextileid : -1) equals t.Id into tGroup
-                           from tLeft in tGroup.DefaultIfEmpty()
-                           select new BurialTextileData
-                           {
-                               BurialId = bm.Id,
-                               ExcavationYear = bm.Fieldbookexcavationyear,
-                               TextileId = tLeft != null ? tLeft.Id : 0,
-                               TextileName = tLeft != null ? tLeft.Description : null,
-                               Area = bm.Area,
-                               Sex = bm.Sex
-                           };
-
-            return View(joinData);
-        }
-
 
         
         public IActionResult Details(long formid)
@@ -426,7 +403,14 @@ namespace Intex2Group22.Controllers
 
             if (ModelState.IsValid)
             {
-                var textile = model.Textile;
+                var textile = new Textile
+                {
+                    Description = model.Textile.Description,
+                    Locale = model.Textile.Locale,
+                    Direction = model.Textile.Direction,
+                    Sampledate = model.Textile.Sampledate,
+                    Estimatedperiod = model.Textile.Estimatedperiod
+                };
                 repo.Textiles.Add(textile);
 
                 var burialTextile = new BurialmainTextile
