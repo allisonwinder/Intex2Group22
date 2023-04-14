@@ -16,6 +16,7 @@ html {
 body {
   margin-bottom: 60px;
   background-color:white;
+  padding-top: 60px;
 }
 
 header {
@@ -70,8 +71,6 @@ testDiv a {
 .info {
     font-size: 20px;
 }
-
-
 
 .landingheader {
     font-family: Constantia;
@@ -146,4 +145,17 @@ label {
 
 .image-spacing {
     margin-bottom: 25px; /* Adjust the value as needed */
+}
+
+img {
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.5);
+}
+
+nav{
+    position: fixed;
+    top: 0;
 }
