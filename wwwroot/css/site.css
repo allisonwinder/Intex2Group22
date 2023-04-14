@@ -21,3 +21,48 @@ header {
     background-color: #002E5D;
     color: #FFFFFF;
 }
+
+.info {
+    font-size: 20px;
+}
+
+body {
+    background-color: gainsboro;
+}
+
+.landingheader {
+    font-family:Constantia; 
+    font-weight:bold; 
+    font-size: 100px;
+}
+
+.privacyheader {
+    font-family: Constantia;
+    font-size: 80px;
+}
+
+.privacyh4 {
+    font-size: 25px;
+    font-style: italic;
+}
+
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 58px;
+    height: calc(100% - 58px);
+    width: 300px;
+    background-color: gainsboro;
+    padding: 20px;
+}
+
+.sidebar a {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: #000;
+}

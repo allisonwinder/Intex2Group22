@@ -45,7 +45,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-controller="User" asp-action="Index">Users</a>
->>>>>>> 9ccb63e7dc5f84245db65e54ab71301b9107aaed
                         </li>
                         <li>
                         @if (SignInManager.IsSignedIn(User))
@@ -78,11 +77,6 @@
         </main>
     </div>
 
-    <footer class="border-top bg-light">
-        <div class="container">
-            &copy; 2023 - Intex2Group22 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -90,6 +84,11 @@
     <script src="~/lib/qrcode.js" ></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-    <partial name="_CookieConsentPartial" />
+    <partial name="_CookieConsentPartial"/>
+    <footer class="fixed-bottom border-top bg-light">
+        <div class="container">
+            &copy; 2023 - Intex2Group22 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
 </body>
 </html>
