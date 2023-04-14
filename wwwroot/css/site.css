@@ -131,10 +131,14 @@ form {
     margin: 0 auto;
 }
 
+
 label {
     font-weight: bold;
-    margin-right: 16px;
+    width: 150px;
+    text-align: right;
+    display: inline-block;
 }
+
 
 .pedit {
     font-size: 20px;
