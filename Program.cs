@@ -145,7 +145,7 @@ else
 }
 
 
-app.UseMiddleware<CspMiddleware>();
+//app.UseMiddleware<CspMiddleware>();
 
 
 app.UseHttpsRedirection();
