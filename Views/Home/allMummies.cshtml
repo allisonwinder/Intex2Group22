@@ -95,22 +95,20 @@
             <li>Head Direction: @b.Headdirection</li>
             <li>Age at Death: @b.Ageatdeath</li>
             <li>Area: @b.Area</li>
-            <li>Burialid: @b.Burialid</li>
-        </ul>
-        @if (User.IsInRole(RoleConstants.Roles.Administrator))
+            <li>Burialid: @b.Burialid @if (User.IsInRole(RoleConstants.Roles.Administrator))
         {
                         <a asp-controller="Home" asp-action="Edit" asp-route-formid="@b.Id" class="btn btn-outline-primary btn-lg  " style="float:right">Edit</a>
                         <a asp-controller="Home" asp-action="Delete" asp-route-formid="@b.Id" class="btn btn-outline-primary btn-lg  " style="float:right">Delete</a>
         }
-
-                    <br />
+                    <a asp-controller="Home" asp-action="Details" asp-route-formid="@b.Id"
+                       class="btn btn-outline-primary btn-lg  " style="float:right">
+                        Details
+                    </a></li>
+        </ul>
+       
             </div>
-            <span class="card-text">
-                <a asp-controller="Home" asp-action="Details" asp-route-formid="@b.Id"
-                    class="btn btn-outline-primary btn-lg  " style="float:right">
-                    Details
-                </a>
-            </span>
+                
+
        
         </div>
         }
