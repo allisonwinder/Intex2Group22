@@ -66,7 +66,11 @@ AddScoped();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
-    options.CheckConsentNeeded = context => true;
+    options.CheckConsentNeeded = context =>
+    {
+        bool hasConsent = context.Request.Cookies["CookieConsent"] == "true"; // Check the value of the server-side flag
+        return !hasConsent; // Show the consent popup if the user has not given consent
+    };
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
