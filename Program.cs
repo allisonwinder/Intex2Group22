@@ -102,7 +102,7 @@ else
     // enable hsts
     app.UseHsts();
 }
-//app.UseMiddleware<CspMiddleware>(); // add middleware for CSP header
+app.UseMiddleware<CspMiddleware>(); // add middleware for CSP header
 
 
 app.UseHttpsRedirection();
