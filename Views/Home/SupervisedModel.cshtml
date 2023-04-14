@@ -166,7 +166,7 @@
             .then(prediction => {
                 console.log(prediction);
                 // Update the h4 tag with the prediction result
-                document.querySelector('#result').textContent = String("Predicted: " + prediction.predictedValue);
+                document.querySelector('#result').textContent = String("Predicted head direction: " + prediction.predictedValue);
                 console.log("it got here at least");
             })
             .catch(error => {
